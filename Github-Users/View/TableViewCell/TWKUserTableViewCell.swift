@@ -10,7 +10,9 @@ import UIKit
 
 class TWKUserTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
+  @IBOutlet weak var lblUsername: UILabel!
+    
+  override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
@@ -21,4 +23,7 @@ class TWKUserTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configureViewCell(displayObject: TWKUserDO) {
+        self.lblUsername.text = displayObject.username
+    }
 }

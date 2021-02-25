@@ -15,9 +15,23 @@ class TWKUsersViewController: TWKViewController {
     public lazy var viewModel = TWKUsersViewModel()
     
     private var users: [TWKUserDO] = [TWKUserDO]()
+    private var usersFiltered: [TWKUserDO] = [TWKUserDO]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    private var isSearchBarEmpty: Bool {
+        return self.searchController.searchBar.text?.isEmpty ?? true
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+    
+    // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Github users"
         
         self.initializeUI()
         self.getUsers()
@@ -29,17 +43,25 @@ class TWKUsersViewController: TWKViewController {
         self.tblUsers.register(UINib(nibName: "TWKUserTableViewCell",
                                  bundle: Bundle.main),
                         forCellReuseIdentifier: String(describing: TWKUserTableViewCell.self))
-        
         self.tblUsers.rowHeight = UITableView.automaticDimension
         self.tblUsers.estimatedRowHeight = 10
         self.tblUsers.allowsMultipleSelection = false
-        
         self.tblUsers.dataSource = self
         self.tblUsers.delegate = self
         self.tblUsers.tableHeaderView = UIView()
         self.tblUsers.tableFooterView = UIView()
         self.tblUsers.separatorStyle = .none
         self.tblUsers.backgroundColor = self.view.backgroundColor
+        
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search"
+
+        self.navigationItem.searchController = searchController
+        self.navigationItem.largeTitleDisplayMode = .automatic
+
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.definesPresentationContext = true
     }
     
     private func getUsers() {
@@ -50,6 +72,16 @@ class TWKUsersViewController: TWKViewController {
                 self.tblUsers.reloadData()
             }
         })
+    }
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        self.usersFiltered = self.users.filter { (user: TWKUserDO) -> Bool in
+            return user.username.lowercased().contains(searchText.lowercased())
+        }
+      
+        DispatchQueue.main.async {
+            self.tblUsers.reloadData()
+        }
     }
     
     /*
@@ -66,19 +98,27 @@ class TWKUsersViewController: TWKViewController {
 
 extension TWKUsersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.isFiltering {
+            return self.usersFiltered.count
+        }
         return self.users.count
     }
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = self.users[indexPath.row]
+        let data: TWKUserDO
+        if self.isFiltering {
+            data = self.usersFiltered[indexPath.row]
+        }
+        else {
+            data = self.users[indexPath.row]
+        }
         
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: TWKUserTableViewCell.self),
             for: indexPath) as! TWKUserTableViewCell
         
         cell.selectionStyle = .none
-//        cell.configureViewCell(displayObject: data,
-//                               loginUserId: self.loginUserId)
+        cell.configureViewCell(displayObject: data)
         return cell
     }
 }
@@ -91,5 +131,18 @@ extension TWKUsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let data = self.users[indexPath.row]
       print("\(DebugInfoKey.database.rawValue) selected a message :: \(data.username) at index (\(indexPath.row))")
+    }
+}
+
+extension TWKUsersViewController: UISearchBarDelegate {
+    
+}
+
+extension TWKUsersViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        // If the search bar contains text, filter our data with the string
+        if let searchText = searchController.searchBar.text {
+            self.filterContentForSearchText(searchText)
+        }
     }
 }
