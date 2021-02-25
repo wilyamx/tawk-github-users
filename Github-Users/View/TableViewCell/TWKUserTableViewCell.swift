@@ -10,20 +10,31 @@ import UIKit
 
 class TWKUserTableViewCell: UITableViewCell {
 
+  @IBOutlet weak var viewBg: UIView!
+  @IBOutlet weak var imgAvatar: UIImageView!
   @IBOutlet weak var lblUsername: UILabel!
+  @IBOutlet weak var imgNote: UIImageView!
+  @IBOutlet weak var viewUsername: UIView!
     
+  @IBAction func detailsAction(_ sender: Any) {
+    
+  }
+  
   override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    super.awakeFromNib()
+      
+    self.viewBg.backgroundColor = .clear
+    self.viewUsername.backgroundColor = .clear
     
-    func configureViewCell(displayObject: TWKUserDO) {
-        self.lblUsername.text = displayObject.username
-    }
+    self.imgAvatar.backgroundColor = .white
+    self.imgAvatar.layer.cornerRadius = self.imgAvatar.frame.size.height / 2.0
+  }
+
+  override func setSelected(_ selected: Bool, animated: Bool) {
+      super.setSelected(selected, animated: animated)
+  }
+  
+  func configureViewCell(displayObject: TWKUserDO) {
+    self.lblUsername.text = displayObject.username
+  }
 }

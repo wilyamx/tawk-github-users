@@ -51,7 +51,7 @@ class TWKUsersViewController: TWKViewController {
         self.tblUsers.tableHeaderView = UIView()
         self.tblUsers.tableFooterView = UIView()
         self.tblUsers.separatorStyle = .none
-        self.tblUsers.backgroundColor = self.view.backgroundColor
+        self.tblUsers.backgroundColor = .lightGray
         
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
