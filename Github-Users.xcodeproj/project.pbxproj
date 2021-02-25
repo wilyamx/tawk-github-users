@@ -101,6 +101,10 @@
 		A210720225E78A62006250FA /* Github-Users */ = {
 			isa = PBXGroup;
 			children = (
+				A210724525E78EAE006250FA /* Extensions */,
+				A210724425E78EA8006250FA /* Constants */,
+				A210724325E78EA1006250FA /* ViewModel */,
+				A210724225E78E9A006250FA /* Protocols */,
 				A210720325E78A62006250FA /* AppDelegate.swift */,
 				A210720525E78A62006250FA /* SceneDelegate.swift */,
 				A210720725E78A62006250FA /* ViewController.swift */,
@@ -129,6 +133,34 @@
 				A210722A25E78A65006250FA /* Info.plist */,
 			);
 			path = "Github-UsersUITests";
+			sourceTree = "<group>";
+		};
+		A210724225E78E9A006250FA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A210724325E78EA1006250FA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A210724425E78EA8006250FA /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		A210724525E78EAE006250FA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,8 +225,10 @@
 		A21071F825E78A62006250FA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TWK;
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
+				ORGANIZATIONNAME = Tawk.to;
 				TargetAttributes = {
 					A21071FF25E78A62006250FA = {
 						CreatedOnToolsVersion = 12.3;
