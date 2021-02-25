@@ -165,7 +165,7 @@
                                 <rect key="frame" x="172" y="629.5" width="70" height="32"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="PvT-j1-m9p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="PvT-j1-m9p"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Save">
