@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		A210720425E78A62006250FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210720325E78A62006250FA /* AppDelegate.swift */; };
 		A210720625E78A62006250FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210720525E78A62006250FA /* SceneDelegate.swift */; };
-		A210720825E78A62006250FA /* TWKUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210720725E78A62006250FA /* TWKUsersViewController.swift */; };
 		A210720B25E78A62006250FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A210720925E78A62006250FA /* Main.storyboard */; };
 		A210720E25E78A62006250FA /* Github_Users.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A210720C25E78A62006250FA /* Github_Users.xcdatamodeld */; };
 		A210721025E78A65006250FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A210720F25E78A65006250FA /* Assets.xcassets */; };
 		A210721325E78A65006250FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A210721125E78A65006250FA /* LaunchScreen.storyboard */; };
 		A210721E25E78A65006250FA /* Github_UsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210721D25E78A65006250FA /* Github_UsersTests.swift */; };
 		A210722925E78A65006250FA /* Github_UsersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210722825E78A65006250FA /* Github_UsersUITests.swift */; };
+		A210724E25E793F3006250FA /* TWKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210724D25E793F3006250FA /* TWKViewController.swift */; };
+		A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210725225E7940D006250FA /* TWKUsersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,6 @@
 		A210720025E78A62006250FA /* Github-Users.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Github-Users.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A210720325E78A62006250FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A210720525E78A62006250FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A210720725E78A62006250FA /* TWKUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUsersViewController.swift; sourceTree = "<group>"; };
 		A210720A25E78A62006250FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A210720D25E78A62006250FA /* Github_Users.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Github_Users.xcdatamodel; sourceTree = "<group>"; };
 		A210720F25E78A65006250FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		A210722425E78A65006250FA /* Github-UsersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Github-UsersUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A210722825E78A65006250FA /* Github_UsersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_UsersUITests.swift; sourceTree = "<group>"; };
 		A210722A25E78A65006250FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A210724D25E793F3006250FA /* TWKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKViewController.swift; sourceTree = "<group>"; };
+		A210725225E7940D006250FA /* TWKUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUsersViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,9 @@
 				A210722725E78A65006250FA /* Github-UsersUITests */,
 				A210720125E78A62006250FA /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		A210720125E78A62006250FA /* Products */ = {
 			isa = PBXGroup;
@@ -166,7 +170,8 @@
 		A210724625E791D6006250FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A210720725E78A62006250FA /* TWKUsersViewController.swift */,
+				A210724D25E793F3006250FA /* TWKViewController.swift */,
+				A210725225E7940D006250FA /* TWKUsersViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,10 +308,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A210720825E78A62006250FA /* TWKUsersViewController.swift in Sources */,
 				A210720E25E78A62006250FA /* Github_Users.xcdatamodeld in Sources */,
 				A210720425E78A62006250FA /* AppDelegate.swift in Sources */,
+				A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */,
 				A210720625E78A62006250FA /* SceneDelegate.swift in Sources */,
+				A210724E25E793F3006250FA /* TWKViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
