@@ -8,11 +8,22 @@
 
 import UIKit
 
-struct LIGReference {
+struct TWKReference {
   static let appDelegate = UIApplication.shared.delegate as! AppDelegate
 }
 
 public enum DebugInfoKey: String {
   case database = "[DATABASE]>>"
-  case messaging = "[USERS]>>"
+  case users = "[USERS]>>"
+}
+
+public enum TWKScreen {
+    case userDetails
+   
+    public var segueIdentifier: String {
+        switch self {
+        case .userDetails:
+            return "UserDetailsSegue"
+        }
+    }
 }

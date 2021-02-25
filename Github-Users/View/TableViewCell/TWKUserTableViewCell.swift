@@ -16,8 +16,13 @@ class TWKUserTableViewCell: UITableViewCell {
   @IBOutlet weak var imgNote: UIImageView!
   @IBOutlet weak var viewUsername: UIView!
     
+  var displayObject: TWKUserDO?
+  var showDetailsHandler: ((TWKUserDO) -> Void)?
   @IBAction func detailsAction(_ sender: Any) {
-    
+    if let handler = self.showDetailsHandler,
+       let displayObject = self.displayObject {
+        handler(displayObject)
+    }
   }
   
   override func awakeFromNib() {
@@ -35,6 +40,7 @@ class TWKUserTableViewCell: UITableViewCell {
   }
   
   func configureViewCell(displayObject: TWKUserDO) {
+    self.displayObject = displayObject
     self.lblUsername.text = displayObject.username
   }
 }

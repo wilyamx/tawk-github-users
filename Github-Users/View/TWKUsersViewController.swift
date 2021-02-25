@@ -58,9 +58,9 @@ class TWKUsersViewController: TWKViewController {
         self.searchController.searchBar.placeholder = "Search"
 
         self.navigationItem.searchController = searchController
-        self.navigationItem.largeTitleDisplayMode = .automatic
+        //self.navigationItem.largeTitleDisplayMode = .automatic
 
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        //self.navigationController?.navigationBar.prefersLargeTitles = true
         self.definesPresentationContext = true
     }
     
@@ -84,15 +84,15 @@ class TWKUsersViewController: TWKViewController {
         }
     }
     
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let vc = segue.destination as? TWKUserDetailsViewController,
+           let displayObject = sender as? TWKUserDO,
+           segue.identifier == TWKScreen.userDetails.segueIdentifier {
+            vc.userDisplayObject = displayObject
+        }
     }
-    */
 
 }
 
@@ -116,9 +116,11 @@ extension TWKUsersViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: TWKUserTableViewCell.self),
             for: indexPath) as! TWKUserTableViewCell
-        
         cell.selectionStyle = .none
         cell.configureViewCell(displayObject: data)
+        cell.showDetailsHandler = { [unowned self] displayObject in
+            self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier, sender: displayObject)
+        }
         return cell
     }
 }
@@ -130,7 +132,7 @@ extension TWKUsersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let data = self.users[indexPath.row]
-      print("\(DebugInfoKey.database.rawValue) selected a message :: \(data.username) at index (\(indexPath.row))")
+      print("\(DebugInfoKey.users.rawValue) selected a message :: \(data.username) at index (\(indexPath.row))")
     }
 }
 
