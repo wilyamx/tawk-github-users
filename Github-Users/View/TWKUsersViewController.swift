@@ -153,6 +153,7 @@ extension TWKUsersViewController: UITableViewDelegate {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // pull-up
         if (self.tblUsers.contentOffset.y + self.tblUsers.frame.size.height) >= self.tblUsers.contentSize.height {
              DispatchQueue.main.async {
                 let spinner = UIActivityIndicatorView(style: .medium)

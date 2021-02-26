@@ -22,7 +22,8 @@ class TWKUsersViewModel: TWKViewModel {
                     for user in users {
                         self.users.append(TWKUserDO(id: user.id ?? 0,
                                                     username: user.login ?? "",
-                                                    avatarUrl: user.avatarUrl ?? ""))
+                                                    avatarUrl: user.avatarUrl ?? "",
+                                                    organizationsUrl: user.organizationsUrl ?? ""))
                     }
                 }
                 // determine last user id
@@ -45,7 +46,8 @@ class TWKUsersViewModel: TWKViewModel {
                     for user in users {
                         self.users.append(TWKUserDO(id: user.id ?? 0,
                                                     username: user.login ?? "",
-                                                    avatarUrl: user.avatarUrl ?? ""))
+                                                    avatarUrl: user.avatarUrl ?? "",
+                                                    organizationsUrl: user.organizationsUrl ?? ""))
                     }
                 }
                 // determine last user id

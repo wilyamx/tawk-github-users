@@ -12,18 +12,14 @@ struct TWKGithubUserCodable: Codable {
     let id: Int32?
     let login: String?
     let avatarUrl: String?
+    let organizationsUrl: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case login = "login"
         case avatarUrl = "avatar_url"
+        case organizationsUrl = "organizations_url"
     }
-//
-//    init(login: String? = "") {
-//        self.login = login
-////        self.id = id
-////        self.avatarUrl = avatarUrl
-//    }
     
     init(from decoder: Decoder) throws {
         let keyedValues = try decoder.container(keyedBy: CodingKeys.self)
@@ -31,5 +27,6 @@ struct TWKGithubUserCodable: Codable {
         self.login = try keyedValues.decodeIfPresent(String.self, forKey: .login)
         self.id = try keyedValues.decodeIfPresent(Int32.self, forKey: .id)
         self.avatarUrl = try keyedValues.decodeIfPresent(String.self, forKey: .avatarUrl)
+        self.organizationsUrl = try keyedValues.decodeIfPresent(String.self, forKey: .organizationsUrl)
     }
 }

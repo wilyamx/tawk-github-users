@@ -30,6 +30,8 @@
 		A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */; };
 		A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419325E912DB006EC26A /* UIImageView+Extension.swift */; };
 		A263419925E9160B006EC26A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419825E9160B006EC26A /* UIImage+Extension.swift */; };
+		A263419E25E94B15006EC26A /* TWKUserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419D25E94B15006EC26A /* TWKUserDetailsViewModel.swift */; };
+		A26341A325E95A81006EC26A /* TWKGithubOrganizationCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26341A225E95A81006EC26A /* TWKGithubOrganizationCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubUserCodable.swift; sourceTree = "<group>"; };
 		A263419325E912DB006EC26A /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		A263419825E9160B006EC26A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		A263419D25E94B15006EC26A /* TWKUserDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUserDetailsViewModel.swift; sourceTree = "<group>"; };
+		A26341A225E95A81006EC26A /* TWKGithubOrganizationCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubOrganizationCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 				A263417625E896D4006EC26A /* Codable */,
 				A210727E25E7A530006250FA /* TWKViewModel.swift */,
 				A210728325E7A568006250FA /* TWKUsersViewModel.swift */,
+				A263419D25E94B15006EC26A /* TWKUserDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */,
+				A26341A225E95A81006EC26A /* TWKGithubOrganizationCodable.swift */,
 			);
 			path = Codable;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A210720E25E78A62006250FA /* Github_Users.xcdatamodeld in Sources */,
+				A263419E25E94B15006EC26A /* TWKUserDetailsViewModel.swift in Sources */,
 				A210727425E7A299006250FA /* TWKUserTableViewCell.swift in Sources */,
 				A210728425E7A568006250FA /* TWKUsersViewModel.swift in Sources */,
 				A210729025E810D1006250FA /* TWKUserDetailsViewController.swift in Sources */,
@@ -392,6 +399,7 @@
 				A210720425E78A62006250FA /* AppDelegate.swift in Sources */,
 				A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */,
 				A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */,
+				A26341A325E95A81006EC26A /* TWKGithubOrganizationCodable.swift in Sources */,
 				A263419925E9160B006EC26A /* UIImage+Extension.swift in Sources */,
 				A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */,
 				A210720625E78A62006250FA /* SceneDelegate.swift in Sources */,

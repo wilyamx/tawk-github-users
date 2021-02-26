@@ -40,7 +40,7 @@ class TWKViewController: UIViewController {
         DispatchQueue.main.asyncAfter(
             deadline: .now() + 3,
             execute: {
-            self.refreshControl.endRefreshing()
+                self.refreshControl.endRefreshing()
         })
     }
     

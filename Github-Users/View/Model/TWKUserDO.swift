@@ -13,12 +13,15 @@ class TWKUserDO: TWKDisplayObject {
     var id: Int32
     var username: String
     var avatarUrl: String
+    var organizationsUrl: String
     
     init(id: Int32,
          username: String,
-         avatarUrl: String) {
+         avatarUrl: String,
+         organizationsUrl: String) {
         self.id = id
         self.username = username
         self.avatarUrl = avatarUrl
+        self.organizationsUrl = organizationsUrl
     }
 }
