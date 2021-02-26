@@ -78,17 +78,20 @@ class TWKUserDetailsViewController: TWKViewController {
         
         self.followersCount = 0
         self.followingCount = 0
-        self.getOrganizationDetails()
+        self.getUserProfile()
     }
     
     // MARK: - Private Methods
     
-    private func getOrganizationDetails() {
+    private func getUserProfile() {
         if let userDO = self.userDisplayObject {
-            self.viewModel.getOrganizationDetails(
-                organizationsUrl: userDO.organizationsUrl,
-                completion: { organization in
-                    print("]>> organization \(organization.followers), \(organization.following)")
+            self.viewModel.getUserProfile(
+                username: userDO.username,
+                completion: { profile in
+                    DispatchQueue.main.async {
+                        self.followersCount = profile.followers
+                        self.followingCount = profile.following
+                    }
                 })
         }
         

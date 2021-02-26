@@ -31,8 +31,8 @@
 		A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419325E912DB006EC26A /* UIImageView+Extension.swift */; };
 		A263419925E9160B006EC26A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419825E9160B006EC26A /* UIImage+Extension.swift */; };
 		A263419E25E94B15006EC26A /* TWKUserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419D25E94B15006EC26A /* TWKUserDetailsViewModel.swift */; };
-		A26341A325E95A81006EC26A /* TWKGithubOrganizationCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26341A225E95A81006EC26A /* TWKGithubOrganizationCodable.swift */; };
-		A26341AB25E96229006EC26A /* TWKOrganizationDO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26341AA25E96229006EC26A /* TWKOrganizationDO.swift */; };
+		A26341A325E95A81006EC26A /* TWKGithubUserProfileCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26341A225E95A81006EC26A /* TWKGithubUserProfileCodable.swift */; };
+		A26341AB25E96229006EC26A /* TWKUserProfileDO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26341AA25E96229006EC26A /* TWKUserProfileDO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +83,8 @@
 		A263419325E912DB006EC26A /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		A263419825E9160B006EC26A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A263419D25E94B15006EC26A /* TWKUserDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUserDetailsViewModel.swift; sourceTree = "<group>"; };
-		A26341A225E95A81006EC26A /* TWKGithubOrganizationCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubOrganizationCodable.swift; sourceTree = "<group>"; };
-		A26341AA25E96229006EC26A /* TWKOrganizationDO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKOrganizationDO.swift; sourceTree = "<group>"; };
+		A26341A225E95A81006EC26A /* TWKGithubUserProfileCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubUserProfileCodable.swift; sourceTree = "<group>"; };
+		A26341AA25E96229006EC26A /* TWKUserProfileDO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUserProfileDO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +242,7 @@
 			children = (
 				A210726525E7A0F8006250FA /* TWKDisplayObject.swift */,
 				A210726D25E7A122006250FA /* TWKUserDO.swift */,
-				A26341AA25E96229006EC26A /* TWKOrganizationDO.swift */,
+				A26341AA25E96229006EC26A /* TWKUserProfileDO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */,
-				A26341A225E95A81006EC26A /* TWKGithubOrganizationCodable.swift */,
+				A26341A225E95A81006EC26A /* TWKGithubUserProfileCodable.swift */,
 			);
 			path = Codable;
 			sourceTree = "<group>";
@@ -401,9 +401,9 @@
 				A210726E25E7A122006250FA /* TWKUserDO.swift in Sources */,
 				A210720425E78A62006250FA /* AppDelegate.swift in Sources */,
 				A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */,
-				A26341AB25E96229006EC26A /* TWKOrganizationDO.swift in Sources */,
+				A26341AB25E96229006EC26A /* TWKUserProfileDO.swift in Sources */,
 				A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */,
-				A26341A325E95A81006EC26A /* TWKGithubOrganizationCodable.swift in Sources */,
+				A26341A325E95A81006EC26A /* TWKGithubUserProfileCodable.swift in Sources */,
 				A263419925E9160B006EC26A /* UIImage+Extension.swift in Sources */,
 				A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */,
 				A210720625E78A62006250FA /* SceneDelegate.swift in Sources */,

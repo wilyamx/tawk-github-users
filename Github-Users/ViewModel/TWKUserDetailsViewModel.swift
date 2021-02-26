@@ -10,17 +10,20 @@ import UIKit
 
 class TWKUserDetailsViewModel: TWKViewModel {
     
-    func getOrganizationDetails(
-        organizationsUrl: String,
-        completion: @escaping (TWKOrganizationDO) -> () ) {
+    func getUserProfile(
+        username: String,
+        completion: @escaping (TWKUserProfileDO) -> () ) {
         
-        TWKNetworkManager.shared.getOrganizationDetails(
-            organizationsUrl: organizationsUrl,
-            completion: { organization in
-                // convert codable data to display model
-                if let organization = organization {
-                    completion(TWKOrganizationDO(followers: organization.followers ?? 0,
-                                                 following: organization.following ?? 0))
+        TWKNetworkManager.shared.getUserProfile(
+            username: username,
+            completion: { profile in
+                if let profile = profile {
+                    let displayObject = TWKUserProfileDO(id: profile.id ?? 0,
+                                                         username: profile.login ?? "",
+                                                         avatarUrl: profile.avatarUrl ?? "",
+                                                         followers: profile.followers ?? 0,
+                                                         following: profile.following ?? 0)
+                    completion(displayObject)
                 }
             })
     }
