@@ -10,7 +10,7 @@ import UIKit
 
 class TWKViewController: UIViewController {
 
-    private let refreshControl = UIRefreshControl()
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +36,12 @@ class TWKViewController: UIViewController {
 
     // MARK: - Handlers
     
-    @objc private func refreshData(_ sender: Any) {
-        print("fetch-data...")
+    @objc func refreshData(_ sender: Any) {
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + 3,
+            execute: {
+            self.refreshControl.endRefreshing()
+        })
     }
     
     /*

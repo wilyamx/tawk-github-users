@@ -29,7 +29,7 @@ class TWKNetworkManager {
         lastUserId: Int32,
         completion: @escaping ([TWKGithubUserCodable]?) -> ()) {
         
-        guard let url = URL(string: "https://api.github.com/users?since=1") else {
+        guard let url = URL(string: "https://api.github.com/users?since=\(lastUserId)") else {
             return
         }
         

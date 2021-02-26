@@ -32,6 +32,7 @@ class TWKUsersViewController: TWKViewController {
         
         self.title = "Github users"
         
+        self.view.backgroundColor = .white
         self.enableRefreshControl(tableView: self.tblUsers)
         
         self.initializeUI()
@@ -52,7 +53,7 @@ class TWKUsersViewController: TWKViewController {
         self.tblUsers.tableHeaderView = UIView()
         self.tblUsers.tableFooterView = UIView()
         self.tblUsers.separatorStyle = .none
-        self.tblUsers.backgroundColor = .lightGray
+        self.tblUsers.backgroundColor = .white
         
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -63,10 +64,22 @@ class TWKUsersViewController: TWKViewController {
     }
     
     private func getUsers() {
-        self.viewModel.getUsers(completion: { users in
+        self.viewModel.pullDown(completion: { users in
             self.users = users
             
             DispatchQueue.main.async {
+                self.tblUsers.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        })
+    }
+    
+    private func getNextUsers() {
+        self.viewModel.pullUp(completion: { users in
+            self.users.append(contentsOf: users)
+            
+            DispatchQueue.main.async {
+                self.tblUsers.tableFooterView = UIView()
                 self.tblUsers.reloadData()
             }
         })
@@ -84,7 +97,9 @@ class TWKUsersViewController: TWKViewController {
     
     // MARK: - Handlers
     
-   
+    override func refreshData(_ sender: Any) {
+        self.getUsers()
+    }
     
     // MARK: - Navigation
 
@@ -135,6 +150,20 @@ extension TWKUsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let data = self.users[indexPath.row]
       print("\(DebugInfoKey.users.rawValue) selected a message :: \(data.username) at index (\(indexPath.row))")
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (self.tblUsers.contentOffset.y + self.tblUsers.frame.size.height) >= self.tblUsers.contentSize.height {
+             DispatchQueue.main.async {
+                let spinner = UIActivityIndicatorView(style: .medium)
+                spinner.color = UIColor.red
+                spinner.hidesWhenStopped = true
+                self.tblUsers.tableFooterView = spinner
+                
+                spinner.startAnimating()
+                self.getNextUsers()
+             }
+        }
     }
 }
 
