@@ -9,6 +9,19 @@
 import UIKit
 
 class TWKUserDetailsViewModel: TWKViewModel {
-    func pullDown() {
+    
+    func getOrganizationDetails(
+        organizationsUrl: String,
+        completion: @escaping (TWKOrganizationDO) -> () ) {
+        
+        TWKNetworkManager.shared.getOrganizationDetails(
+            organizationsUrl: organizationsUrl,
+            completion: { organization in
+                // convert codable data to display model
+                if let organization = organization {
+                    completion(TWKOrganizationDO(followers: organization.followers ?? 0,
+                                                 following: organization.following ?? 0))
+                }
+            })
     }
 }

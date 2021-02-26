@@ -41,7 +41,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btW-Lq-OFW">
-                                        <rect key="frame" x="0.0" y="21" width="43" height="29"/>
+                                        <rect key="frame" x="0.0" y="30" width="60" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="sgz-hM-2c8"/>
+                                            <constraint firstAttribute="width" constant="60" id="uTD-PV-wu3"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="details">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,6 +102,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnDetails" destination="btW-Lq-OFW" id="Sob-qT-bUQ"/>
                 <outlet property="imgAvatar" destination="3oV-tn-GKT" id="x7T-KT-4lp"/>
                 <outlet property="imgNote" destination="hkf-sK-sjL" id="gK3-bQ-Vpt"/>
                 <outlet property="lblUsername" destination="YBJ-w7-seK" id="kGs-OY-WZr"/>
@@ -111,6 +117,9 @@
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

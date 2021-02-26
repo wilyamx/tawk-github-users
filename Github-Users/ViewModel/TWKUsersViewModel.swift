@@ -13,6 +13,7 @@ class TWKUsersViewModel: TWKViewModel {
     private var lastUserId: Int32 = 1
     
     func pullDown(completion: @escaping ([TWKUserDO]) -> ()) {
+        
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
             completion: { resultUsers in
@@ -37,6 +38,7 @@ class TWKUsersViewModel: TWKViewModel {
     }
     
     func pullUp(completion: @escaping ([TWKUserDO]) -> ()) {
+        
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
             completion: { resultUsers in

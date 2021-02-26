@@ -10,7 +10,9 @@ import UIKit
 
 class TWKUserDetailsViewController: TWKViewController {
 
+    public lazy var viewModel = TWKUserDetailsViewModel()
     var userDisplayObject: TWKUserDO?
+    
     
     @IBOutlet weak var imgAvatar: UIImageView!
 
@@ -34,6 +36,7 @@ class TWKUserDetailsViewController: TWKViewController {
         super.viewDidLoad()
     
         self.imgAvatar.backgroundColor = .lightGray
+        self.imgAvatar.contentMode = .scaleAspectFit
         
         self.stkvFollow.backgroundColor = .clear
     
@@ -44,7 +47,34 @@ class TWKUserDetailsViewController: TWKViewController {
         self.txtvNotes.layer.borderColor = UIColor.black.cgColor
         
         if let displayObject = self.userDisplayObject {
-          self.title = displayObject.username
+            self.title = displayObject.username
+            
+            if displayObject.avatarUrl.count > 0 {
+                if let url = URL(string: displayObject.avatarUrl) {
+                    self.imgAvatar.load(
+                        url: url,
+                        completion: { image in
+                            DispatchQueue.main.async {
+                                self.imgAvatar.contentMode = .scaleAspectFill
+                                self.imgAvatar.image = image
+                            }
+                        })
+                }
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Private Methods
+    
+    private func getOrganizationDetails() {
+        if let userDO = self.userDisplayObject {
+            self.viewModel.getOrganizationDetails(
+                organizationsUrl: userDO.organizationsUrl,
+                completion: { organization in
+                    print("]>>")
+                })
         }
         
     }

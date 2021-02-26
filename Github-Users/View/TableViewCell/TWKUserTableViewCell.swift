@@ -15,7 +15,8 @@ class TWKUserTableViewCell: UITableViewCell {
     @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var imgNote: UIImageView!
     @IBOutlet weak var viewUsername: UIView!
-
+    @IBOutlet weak var btnDetails: UIButton!
+    
     var displayObject: TWKUserDO?
     var showDetailsHandler: ((TWKUserDO) -> Void)?
     @IBAction func detailsAction(_ sender: Any) {
@@ -34,6 +35,12 @@ class TWKUserTableViewCell: UITableViewCell {
         self.imgAvatar.backgroundColor = .white
         self.imgAvatar.layer.cornerRadius = self.imgAvatar.frame.size.height / 2.0
 
+        self.btnDetails.setTitleColor(.darkGray, for: .normal)
+        self.btnDetails.backgroundColor = .white
+        self.btnDetails.layer.cornerRadius = self.btnDetails.frame.size.height / 2.0
+        self.btnDetails.layer.borderWidth = 1.0
+        self.btnDetails.layer.borderColor = UIColor.darkGray.cgColor
+        
         self.imgNote.isHidden = true
     }
 

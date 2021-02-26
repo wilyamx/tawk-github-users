@@ -133,7 +133,7 @@ class TWKNetworkManager {
         organizationsUrl: String,
         completion: @escaping (TWKGithubOrganizationCodable?) -> ()) {
         
-        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)/orgs/github") else {
+        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)/orgs?org=\(organizationsUrl)") else {
             return
         }
         
