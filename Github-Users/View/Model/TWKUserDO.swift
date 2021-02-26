@@ -10,9 +10,15 @@ import UIKit
 
 class TWKUserDO: TWKDisplayObject {
     
+    var id: Int32
     var username: String
+    var avatarUrl: String
     
-    init(username: String) {
+    init(id: Int32,
+         username: String,
+         avatarUrl: String) {
+        self.id = id
         self.username = username
+        self.avatarUrl = avatarUrl
     }
 }

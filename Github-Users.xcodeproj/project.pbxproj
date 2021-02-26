@@ -28,6 +28,7 @@
 		A210729025E810D1006250FA /* TWKUserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210728F25E810D1006250FA /* TWKUserDetailsViewController.swift */; };
 		A263417225E89556006EC26A /* TWKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417125E89556006EC26A /* TWKNetworkManager.swift */; };
 		A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */; };
+		A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419325E912DB006EC26A /* UIImageView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		A210728F25E810D1006250FA /* TWKUserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUserDetailsViewController.swift; sourceTree = "<group>"; };
 		A263417125E89556006EC26A /* TWKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKNetworkManager.swift; sourceTree = "<group>"; };
 		A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubUserCodable.swift; sourceTree = "<group>"; };
+		A263419325E912DB006EC26A /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 		A210724525E78EAE006250FA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A263419325E912DB006EC26A /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				A263417225E89556006EC26A /* TWKNetworkManager.swift in Sources */,
 				A210726E25E7A122006250FA /* TWKUserDO.swift in Sources */,
 				A210720425E78A62006250FA /* AppDelegate.swift in Sources */,
+				A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */,
 				A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */,
 				A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */,
 				A210720625E78A62006250FA /* SceneDelegate.swift in Sources */,

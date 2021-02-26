@@ -20,7 +20,9 @@ class TWKUsersViewModel: TWKViewModel {
                 if let users = resultUsers {
                     self.users.removeAll()
                     for user in users {
-                        self.users.append(TWKUserDO(username: user.login ?? ""))
+                        self.users.append(TWKUserDO(id: user.id ?? 0,
+                                                    username: user.login ?? "",
+                                                    avatarUrl: user.avatarUrl ?? ""))
                     }
                 }
                 // determine last user id
@@ -41,7 +43,9 @@ class TWKUsersViewModel: TWKViewModel {
                 if let users = resultUsers {
                     self.users.removeAll()
                     for user in users {
-                        self.users.append(TWKUserDO(username: user.login ?? ""))
+                        self.users.append(TWKUserDO(id: user.id ?? 0,
+                                                    username: user.login ?? "",
+                                                    avatarUrl: user.avatarUrl ?? ""))
                     }
                 }
                 // determine last user id

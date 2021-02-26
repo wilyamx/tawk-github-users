@@ -42,5 +42,11 @@ class TWKUserTableViewCell: UITableViewCell {
   func configureViewCell(displayObject: TWKUserDO) {
     self.displayObject = displayObject
     self.lblUsername.text = displayObject.username
+    
+    if displayObject.avatarUrl.count > 0 {
+        if let url = URL(string: displayObject.avatarUrl) {
+            self.imgAvatar.load(url: url)
+        }
+    }
   }
 }

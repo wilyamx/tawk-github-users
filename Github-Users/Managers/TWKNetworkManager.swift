@@ -21,7 +21,7 @@ enum TWKResponse<T> {
 class TWKNetworkManager {
     static let shared = TWKNetworkManager()
     
-    static let DOMAIN_URL_STRING = "https://api.github.com"
+    static let BASE_URL = "https://api.github.com/"
     
     // MARK: - Public Methods
     
@@ -29,7 +29,7 @@ class TWKNetworkManager {
         lastUserId: Int32,
         completion: @escaping ([TWKGithubUserCodable]?) -> ()) {
         
-        guard let url = URL(string: "https://api.github.com/users?since=\(lastUserId)") else {
+        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)users?since=\(lastUserId)") else {
             return
         }
         
