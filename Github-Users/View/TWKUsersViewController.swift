@@ -13,11 +13,10 @@ class TWKUsersViewController: TWKViewController {
     @IBOutlet weak var tblUsers: UITableView!
   
     public lazy var viewModel = TWKUsersViewModel()
-    
     private var users: [TWKUserDO] = [TWKUserDO]()
     private var usersFiltered: [TWKUserDO] = [TWKUserDO]()
     
-    let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = UISearchController(searchResultsController: nil)
     
     private var isSearchBarEmpty: Bool {
         return self.searchController.searchBar.text?.isEmpty ?? true
@@ -32,6 +31,8 @@ class TWKUsersViewController: TWKViewController {
         super.viewDidLoad()
         
         self.title = "Github users"
+        
+        self.enableRefreshControl(tableView: self.tblUsers)
         
         self.initializeUI()
         self.getUsers()
@@ -58,9 +59,6 @@ class TWKUsersViewController: TWKViewController {
         self.searchController.searchBar.placeholder = "Search"
 
         self.navigationItem.searchController = searchController
-        //self.navigationItem.largeTitleDisplayMode = .automatic
-
-        //self.navigationController?.navigationBar.prefersLargeTitles = true
         self.definesPresentationContext = true
     }
     
@@ -83,6 +81,10 @@ class TWKUsersViewController: TWKViewController {
             self.tblUsers.reloadData()
         }
     }
+    
+    // MARK: - Handlers
+    
+   
     
     // MARK: - Navigation
 

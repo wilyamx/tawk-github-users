@@ -9,6 +9,7 @@
 import UIKit
 
 class TWKUserDO: TWKDisplayObject {
+    
     var username: String
     
     init(username: String) {
