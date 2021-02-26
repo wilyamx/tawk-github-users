@@ -9,12 +9,18 @@
 import UIKit
 
 struct TWKReference {
-  static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
 }
 
 public enum DebugInfoKey: String {
-  case database = "[DATABASE]>>"
-  case users = "[USERS]>>"
+    case database = "[DATABASE]>>"
+    case users = "[USERS]>>"
+    case api = "[API]>>"
+    case error = "[ERROR]>>"
+    
+    func log(info: String) {
+        print("\(self.rawValue) \(info)")
+    }
 }
 
 public enum TWKScreen {

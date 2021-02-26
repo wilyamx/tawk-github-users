@@ -26,6 +26,8 @@
 		A210727F25E7A530006250FA /* TWKViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210727E25E7A530006250FA /* TWKViewModel.swift */; };
 		A210728425E7A568006250FA /* TWKUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210728325E7A568006250FA /* TWKUsersViewModel.swift */; };
 		A210729025E810D1006250FA /* TWKUserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210728F25E810D1006250FA /* TWKUserDetailsViewController.swift */; };
+		A263417225E89556006EC26A /* TWKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417125E89556006EC26A /* TWKNetworkManager.swift */; };
+		A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		A210727E25E7A530006250FA /* TWKViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKViewModel.swift; sourceTree = "<group>"; };
 		A210728325E7A568006250FA /* TWKUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUsersViewModel.swift; sourceTree = "<group>"; };
 		A210728F25E810D1006250FA /* TWKUserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUserDetailsViewController.swift; sourceTree = "<group>"; };
+		A263417125E89556006EC26A /* TWKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKNetworkManager.swift; sourceTree = "<group>"; };
+		A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubUserCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,7 @@
 		A210724325E78EA1006250FA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A263417625E896D4006EC26A /* Codable */,
 				A210727E25E7A530006250FA /* TWKViewModel.swift */,
 				A210728325E7A568006250FA /* TWKUsersViewModel.swift */,
 			);
@@ -205,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				A210725B25E7953A006250FA /* TWKDatabaseManager.swift */,
+				A263417125E89556006EC26A /* TWKNetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -225,6 +231,14 @@
 				A210726D25E7A122006250FA /* TWKUserDO.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A263417625E896D4006EC26A /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */,
+			);
+			path = Codable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,8 +381,10 @@
 				A210727A25E7A422006250FA /* TWKConstants.swift in Sources */,
 				A210725C25E7953A006250FA /* TWKDatabaseManager.swift in Sources */,
 				A210727F25E7A530006250FA /* TWKViewModel.swift in Sources */,
+				A263417225E89556006EC26A /* TWKNetworkManager.swift in Sources */,
 				A210726E25E7A122006250FA /* TWKUserDO.swift in Sources */,
 				A210720425E78A62006250FA /* AppDelegate.swift in Sources */,
+				A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */,
 				A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */,
 				A210720625E78A62006250FA /* SceneDelegate.swift in Sources */,
 				A210726625E7A0F8006250FA /* TWKDisplayObject.swift in Sources */,

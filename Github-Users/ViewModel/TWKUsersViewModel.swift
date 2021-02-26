@@ -10,13 +10,27 @@ import Foundation
 
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
-  
-    func getUsers(completion: @escaping ([TWKUserDO]) -> Void) {
-        self.users.removeAll()
-        self.users.append(TWKUserDO(username: "User 1"))
-        self.users.append(TWKUserDO(username: "User 2"))
-        self.users.append(TWKUserDO(username: "User 3"))
-        self.users.append(TWKUserDO(username: "User 4"))
-        completion(self.users)
+    private var lastUserId: Int32 = 1
+    
+    func getUsers(completion: @escaping ([TWKUserDO]) -> ()) {
+        TWKNetworkManager.shared.getUsers(
+            lastUserId: self.lastUserId,
+            completion: { resultUsers in
+                // convert codable data to display model
+                if let users = resultUsers {
+                    self.users.removeAll()
+                    for user in users {
+                        self.users.append(TWKUserDO(username: user.login ?? ""))
+                    }
+                }
+                // determine last user id
+                if let lastUser = resultUsers?.last,
+                   let lastUserId = lastUser.id {
+                    self.lastUserId = lastUserId
+                }
+                completion(self.users)
+            })
+    
     }
+    
 }
