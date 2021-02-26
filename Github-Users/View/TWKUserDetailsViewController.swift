@@ -15,12 +15,20 @@ class TWKUserDetailsViewController: TWKViewController {
 
     private var followersCount: Int32 = 0 {
         didSet {
-            self.lblFollowers.text = "followers: \(followersCount)"
+            let message = "followers: \(followersCount)"
+            self.lblFollowers.text = message
+            self.highlightFollowCount(message: message,
+                                      highlightedString: "\(followersCount)",
+                                      label: self.lblFollowers)
         }
     }
     private var followingCount: Int32 = 0 {
         didSet {
-            self.lblFollowing.text = "following: \(followingCount)"
+            let message = "following: \(followingCount)"
+            self.lblFollowing.text = message
+            self.highlightFollowCount(message: message,
+                                      highlightedString: "\(followingCount)",
+                                      label: self.lblFollowing)
         }
     }
     
@@ -53,6 +61,8 @@ class TWKUserDetailsViewController: TWKViewController {
         self.stkvFollow.backgroundColor = .clear
     
         self.stkvDetails.backgroundColor = .clear
+        self.stkvDetails.layer.borderWidth = 1.0
+        self.stkvDetails.layer.borderColor = UIColor.black.cgColor
         
         self.viewNotesBg.backgroundColor = .clear
         self.txtvNotes.layer.borderWidth = 1.0
@@ -95,6 +105,30 @@ class TWKUserDetailsViewController: TWKViewController {
                 })
         }
         
+    }
+    
+    private func highlightFollowCount(
+        message: String,
+        highlightedString: String,
+        label: UILabel) {
+        
+        let messageRange = (message as NSString).range(of: message)
+        let highlightRange = (message as NSString).range(of: highlightedString)
+        
+        let boldAttribute = [
+            NSAttributedString.Key.font: UIFont.setBold(fontSize: 20.0),
+            NSAttributedString.Key.foregroundColor: UIColor.red
+        ]
+        let regularAttribute = [
+            NSAttributedString.Key.font: UIFont.setRegular(fontSize: 16.0),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
+        
+        let attributedString = NSMutableAttributedString(string: message)
+        attributedString.addAttributes(regularAttribute as [NSAttributedString.Key : Any], range: messageRange)
+        attributedString.addAttributes(boldAttribute as [NSAttributedString.Key : Any], range: highlightRange)
+        
+        label.attributedText = attributedString
     }
     
     /*
