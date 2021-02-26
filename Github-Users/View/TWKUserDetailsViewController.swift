@@ -11,8 +11,18 @@ import UIKit
 class TWKUserDetailsViewController: TWKViewController {
 
     public lazy var viewModel = TWKUserDetailsViewModel()
-    var userDisplayObject: TWKUserDO?
-    
+    public var userDisplayObject: TWKUserDO?
+
+    private var followersCount: Int32 = 0 {
+        didSet {
+            self.lblFollowers.text = "followers: \(followersCount)"
+        }
+    }
+    private var followingCount: Int32 = 0 {
+        didSet {
+            self.lblFollowing.text = "following: \(followingCount)"
+        }
+    }
     
     @IBOutlet weak var imgAvatar: UIImageView!
 
@@ -26,6 +36,8 @@ class TWKUserDetailsViewController: TWKViewController {
     @IBOutlet weak var viewNotesBg: UIView!
     @IBOutlet weak var txtvNotes: UITextView!
 
+    // MARK: - Actions
+    
     @IBAction func saveAction(_ sender: Any) {
 
     }
@@ -64,6 +76,9 @@ class TWKUserDetailsViewController: TWKViewController {
             
         }
         
+        self.followersCount = 0
+        self.followingCount = 0
+        self.getOrganizationDetails()
     }
     
     // MARK: - Private Methods
@@ -73,7 +88,7 @@ class TWKUserDetailsViewController: TWKViewController {
             self.viewModel.getOrganizationDetails(
                 organizationsUrl: userDO.organizationsUrl,
                 completion: { organization in
-                    print("]>>")
+                    print("]>> organization \(organization.followers), \(organization.following)")
                 })
         }
         

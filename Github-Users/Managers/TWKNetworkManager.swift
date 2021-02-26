@@ -133,9 +133,13 @@ class TWKNetworkManager {
         organizationsUrl: String,
         completion: @escaping (TWKGithubOrganizationCodable?) -> ()) {
         
-        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)/orgs?org=\(organizationsUrl)") else {
+        //FIXME: invalid url and parameter used
+        guard let url = URL(string: "\(organizationsUrl)/org?org=\(organizationsUrl)") else {
             return
         }
+//        guard let url = URL(string: "\(organizationsUrl)?org=\(organizationsUrl)") else {
+//            return
+//        }
         
         URLSession.shared.dataTask(
             with: url,
