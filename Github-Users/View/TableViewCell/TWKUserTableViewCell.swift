@@ -33,6 +33,8 @@ class TWKUserTableViewCell: UITableViewCell {
     
     self.imgAvatar.backgroundColor = .white
     self.imgAvatar.layer.cornerRadius = self.imgAvatar.frame.size.height / 2.0
+    
+    self.imgNote.isHidden = true
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {

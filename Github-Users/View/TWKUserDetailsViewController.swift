@@ -33,11 +33,15 @@ class TWKUserDetailsViewController: TWKViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        self.imgAvatar.backgroundColor = .lightGray
+        
         self.stkvFollow.backgroundColor = .clear
     
         self.stkvDetails.backgroundColor = .clear
         
         self.viewNotesBg.backgroundColor = .clear
+        self.txtvNotes.layer.borderWidth = 1.0
+        self.txtvNotes.layer.borderColor = UIColor.black.cgColor
         
         if let displayObject = self.userDisplayObject {
           self.title = displayObject.username

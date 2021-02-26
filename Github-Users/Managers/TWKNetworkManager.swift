@@ -22,6 +22,7 @@ class TWKNetworkManager {
     static let shared = TWKNetworkManager()
     
     static let BASE_URL = "https://api.github.com/"
+    static let PAGE_SIZE = 5
     
     // MARK: - Public Methods
     
@@ -29,7 +30,7 @@ class TWKNetworkManager {
         lastUserId: Int32,
         completion: @escaping ([TWKGithubUserCodable]?) -> ()) {
         
-        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)users?since=\(lastUserId)") else {
+        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)users?since=\(lastUserId)&per_page=\(TWKNetworkManager.PAGE_SIZE)") else {
             return
         }
         
