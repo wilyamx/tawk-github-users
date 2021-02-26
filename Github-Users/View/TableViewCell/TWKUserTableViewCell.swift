@@ -39,14 +39,34 @@ class TWKUserTableViewCell: UITableViewCell {
       super.setSelected(selected, animated: animated)
   }
   
-  func configureViewCell(displayObject: TWKUserDO) {
+    func configureViewCell(displayObject: TWKUserDO, indexPath: IndexPath) {
     self.displayObject = displayObject
     self.lblUsername.text = displayObject.username
     
     if displayObject.avatarUrl.count > 0 {
         if let url = URL(string: displayObject.avatarUrl) {
-            self.imgAvatar.load(url: url)
+            self.imgAvatar.load(
+                url: url,
+                completion: { image in
+                    if indexPath.row % 4 == 0 {
+                        if let inverseImage = image.inverseImage() {
+                            DispatchQueue.main.async {
+                                self.imgAvatar.image = inverseImage
+                                self.imgAvatar.layer.borderWidth = 3.0
+                                self.imgAvatar.layer.borderColor = UIColor.red.cgColor
+                            }
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.imgAvatar.image = image
+                            self.imgAvatar.layer.borderWidth = 0
+                            self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
+                        }
+                    }
+            })
         }
     }
+    
   }
 }

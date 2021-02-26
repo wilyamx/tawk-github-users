@@ -134,7 +134,7 @@ extension TWKUsersViewController: UITableViewDataSource {
             withIdentifier: String(describing: TWKUserTableViewCell.self),
             for: indexPath) as! TWKUserTableViewCell
         cell.selectionStyle = .none
-        cell.configureViewCell(displayObject: data)
+        cell.configureViewCell(displayObject: data, indexPath: indexPath)
         cell.showDetailsHandler = { [unowned self] displayObject in
             self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier, sender: displayObject)
         }
