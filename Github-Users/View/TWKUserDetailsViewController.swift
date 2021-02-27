@@ -31,6 +31,7 @@ class TWKUserDetailsViewController: TWKViewController {
                                       label: self.lblFollowing)
         }
     }
+    private var blogUrlRange: NSRange? = nil
     
     @IBOutlet weak var imgAvatar: UIImageView!
 
@@ -107,7 +108,7 @@ class TWKUserDetailsViewController: TWKViewController {
         if let userDO = self.userDisplayObject {
             self.viewModel.getUserProfile(
                 username: userDO.username,
-                completion: { profile in
+                completion: { [unowned self] profile in
                     DispatchQueue.main.async {
                         self.followersCount = profile.followers
                         self.followingCount = profile.following
@@ -124,6 +125,16 @@ class TWKUserDetailsViewController: TWKViewController {
                             message: "Blog: \(profile.blog)",
                             highlightedString: "\(profile.blog)",
                             label: self.lblBlog)
+                        
+                        // blog url tap gesture
+                        self.lblBlog.isUserInteractionEnabled = true
+                        if let blogText = self.lblBlog.text {
+                            self.blogUrlRange = (blogText as NSString).range(of: profile.blog)
+                        }
+                        let tapGesture = UITapGestureRecognizer(
+                            target: self,
+                            action: #selector(blogUrlHandler(gesture:)))
+                        self.lblBlog.addGestureRecognizer(tapGesture)
                     }
                 })
         }
@@ -152,6 +163,20 @@ class TWKUserDetailsViewController: TWKViewController {
         attributedString.addAttributes(boldAttribute as [NSAttributedString.Key : Any], range: highlightRange)
         
         label.attributedText = attributedString
+    }
+    
+    // MARK: - Handlers
+    
+    @objc private func blogUrlHandler(gesture: UITapGestureRecognizer) {
+        if let range = self.blogUrlRange,
+           gesture.didTapAttributedTextInLabel(label: self.lblBlog, inRange: range) {
+            if let blogText = self.lblBlog.text {
+                let urlString = (blogText as NSString).substring(with: range)
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
     }
     
     /*
