@@ -99,6 +99,11 @@ class TWKUserDetailsViewController: TWKViewController {
         self.lblCompany.text = "Company:"
         self.lblBlog.text = "Blog:"
         
+        self.btnSave.layer.cornerRadius = 5.0
+        self.btnSave.backgroundColor = .red
+        self.btnSave.setTitleColor(.white, for: .normal)
+        self.btnSave.titleLabel?.font = UIFont.setBold(fontSize: 18.0)
+        
         self.getUserProfile()
     }
     
