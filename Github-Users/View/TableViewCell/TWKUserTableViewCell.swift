@@ -76,6 +76,7 @@ class TWKUserTableViewCell: UITableViewCell {
                 })
             }
         }
-    
+        
+        self.imgNote.isHidden = !(displayObject.hasNote ?? false)
     }
 }

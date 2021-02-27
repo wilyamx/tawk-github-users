@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import CoreData
 
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
     private var lastUserId: Int32 = 1
     
-    func pullDown(completion: @escaping ([TWKUserDO]) -> ()) {
+    func pullDown(
+        completion: @escaping ([TWKUserDO]) -> (),
+        noteStatusComplete: @escaping ([TWKUserDO]) -> ()) {
         self.lastUserId = 1
         
         TWKNetworkManager.shared.getUsers(
@@ -32,6 +35,21 @@ class TWKUsersViewModel: TWKViewModel {
                         self.users.append(displayObject)
                     }
                     
+                    // get users note statuses
+                    let userIds = users.map({ $0.id ?? 0})
+                    DispatchQueue.main.async {
+                        if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
+                            let usersNoteStatus = managedUsers.map(
+                                { user in TWKUserDO(id: user.id,
+                                                    username: user.login ?? "",
+                                                    avatarUrl: user.avatarUrl ?? "",
+                                                    hasNote: user.note != nil)
+                                    
+                                })
+                            noteStatusComplete(usersNoteStatus)
+                        }
+                    }
+                    
                     // determine last user id
                     if let lastUser = resultUsers?.last,
                        let lastUserId = lastUser.id {
@@ -44,7 +62,9 @@ class TWKUsersViewModel: TWKViewModel {
     
     }
     
-    func pullUp(completion: @escaping ([TWKUserDO]) -> ()) {
+    func pullUp(
+        completion: @escaping ([TWKUserDO]) -> (),
+        noteStatusComplete: @escaping ([TWKUserDO]) -> ()) {
         
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
@@ -62,13 +82,30 @@ class TWKUsersViewModel: TWKViewModel {
                                                       avatarUrl: user.avatarUrl ?? "")
                         self.users.append(displayObject)
                     }
+                    
+                    // get users note statuses
+                    let userIds = users.map({ $0.id ?? 0})
+                    DispatchQueue.main.async {
+                        if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
+                            let usersNoteStatus = managedUsers.map(
+                                { user in TWKUserDO(id: user.id,
+                                                    username: user.login ?? "",
+                                                    avatarUrl: user.avatarUrl ?? "",
+                                                    hasNote: user.note != nil)
+                                    
+                                })
+                            noteStatusComplete(usersNoteStatus)
+                        }
+                    }
+                    
+                    // determine last user id
+                    if let lastUser = resultUsers?.last,
+                       let lastUserId = lastUser.id {
+                        self.lastUserId = lastUserId
+                    }
+                    completion(self.users)
                 }
-                // determine last user id
-                if let lastUser = resultUsers?.last,
-                   let lastUserId = lastUser.id {
-                    self.lastUserId = lastUserId
-                }
-                completion(self.users)
+                
             })
     
     }

@@ -64,25 +64,57 @@ class TWKUsersViewController: TWKViewController {
     }
     
     private func getUsers() {
-        self.viewModel.pullDown(completion: { users in
-            DispatchQueue.main.async {
-                self.users = users
-                
-                self.tblUsers.reloadData()
-                self.refreshControl.endRefreshing()
-            }
-        })
+        self.viewModel.pullDown(
+            completion: { users in
+                DispatchQueue.main.async {
+                    self.users = users
+                    
+                    self.tblUsers.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            },
+            noteStatusComplete: { users in
+                DispatchQueue.main.async {
+                    for user in self.users {
+                        for userNoteStatus in users {
+                            if user.id == userNoteStatus.id {
+                                user.hasNote = userNoteStatus.hasNote
+                                break
+                            }
+                        }
+                    }
+                    
+                    self.tblUsers.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            })
     }
     
     private func getNextUsers() {
-        self.viewModel.pullUp(completion: { users in
-            self.users.append(contentsOf: users)
-            
-            DispatchQueue.main.async {
-                self.tblUsers.tableFooterView = UIView()
-                self.tblUsers.reloadData()
-            }
-        })
+        self.viewModel.pullUp(
+            completion: { users in
+                DispatchQueue.main.async {
+                    self.users.append(contentsOf: users)
+                    
+                    self.tblUsers.tableFooterView = UIView()
+                    self.tblUsers.reloadData()
+                }
+            },
+            noteStatusComplete: { users in
+                DispatchQueue.main.async {
+                    for user in self.users {
+                        for userNoteStatus in users {
+                            if user.id == userNoteStatus.id {
+                                user.hasNote = userNoteStatus.hasNote
+                                break
+                            }
+                        }
+                    }
+                    
+                    self.tblUsers.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            })
     }
     
     private func filterContentForSearchText(_ searchText: String) {

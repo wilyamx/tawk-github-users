@@ -90,6 +90,7 @@ class TWKDatabaseManager {
         }
         catch let error {
             DebugInfoKey.error.log(info: "Fetch error for id=\(userId) :: \(error.localizedDescription)")
+            return nil
         }
         
         if items.count == 1 {
@@ -98,6 +99,23 @@ class TWKDatabaseManager {
             }
         }
         return nil
+    }
+    
+    public func getUsersByIds(userIds: [Int32]) -> [NSManagedObject]? {
+        let context = self.localDB.viewContext
+
+        let fetchRequest:NSFetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "id in %@", userIds)
+        
+        var items: [Any] = []
+        do {
+            items = try context.fetch(fetchRequest)
+            return items as? [NSManagedObject]
+        }
+        catch let error {
+            DebugInfoKey.error.log(info: "Fetch error for ids=\(userIds) :: \(error.localizedDescription)")
+            return nil
+        }
     }
     
     public func userCreateOrUpdateNote(userId: Int32, message: String) -> String? {
@@ -134,4 +152,5 @@ class TWKDatabaseManager {
             }
         }
     }
+    
 }
