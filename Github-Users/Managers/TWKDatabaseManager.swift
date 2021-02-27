@@ -28,7 +28,7 @@ class TWKDatabaseManager {
     
     // MARK: - Managed User
         
-    public func createUser(from codableModel: TWKGithubUserCodable) {
+    public func userCreateOrUpdate(from codableModel: TWKGithubUserCodable) {
         guard let primaryKey = codableModel.id else { return }
 
         let context = localDB.viewContext
@@ -44,21 +44,38 @@ class TWKDatabaseManager {
             DebugInfoKey.error.log(info: "Fetch error for id=\(primaryKey) :: \(error.localizedDescription)")
         }
 
-        // do not create user if already existing
-        guard items.count == 0 else { return }
-        
         let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
-        let newUser = NSManagedObject(entity: entity!, insertInto: context)
-        newUser.setValue(codableModel.id, forKey: "id")
-        newUser.setValue(codableModel.login, forKey: "login")
-        newUser.setValue(codableModel.avatarUrl, forKey: "avatarUrl")
+        
+        // create
+        if items.count == 0 {
+            let newUser = NSManagedObject(entity: entity!, insertInto: context)
+            newUser.setValue(codableModel.id, forKey: "id")
+            newUser.setValue(codableModel.login, forKey: "login")
+            newUser.setValue(codableModel.avatarUrl, forKey: "avatarUrl")
 
-        do {
-            try context.save()
+            do {
+                try context.save()
+            }
+            catch let error {
+                DebugInfoKey.error.log(info: "Failed create user for \(codableModel.login ?? "") (\(codableModel.id ?? 0)) :: \(error.localizedDescription)")
+            }
         }
-        catch let error {
-            DebugInfoKey.error.log(info: "Failed create user for \(codableModel.login ?? "") (\(codableModel.id ?? 0)) :: \(error.localizedDescription)")
+        // update
+        else {
+            if let objectToUpdate = items.first as? NSManagedObject {
+                objectToUpdate.setValue(codableModel.id, forKey: "id")
+                objectToUpdate.setValue(codableModel.login, forKey: "login")
+                objectToUpdate.setValue(codableModel.avatarUrl, forKey: "avatarUrl")
+                
+                do {
+                    try context.save()
+                }
+                catch let error {
+                    DebugInfoKey.error.log(info: "Failed update user for \(codableModel.login ?? "") (\(codableModel.id ?? 0)) :: \(error.localizedDescription)")
+                }
+            }
         }
+       
     }
         
     // MARK: - Managed Note

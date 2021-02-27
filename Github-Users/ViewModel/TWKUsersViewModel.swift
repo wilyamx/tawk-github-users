@@ -13,6 +13,7 @@ class TWKUsersViewModel: TWKViewModel {
     private var lastUserId: Int32 = 1
     
     func pullDown(completion: @escaping ([TWKUserDO]) -> ()) {
+        self.lastUserId = 1
         
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
@@ -22,7 +23,7 @@ class TWKUsersViewModel: TWKViewModel {
                     self.users.removeAll()
                     for user in users {
                         DispatchQueue.main.async {
-                            TWKDatabaseManager.shared.createUser(from: user)
+                            TWKDatabaseManager.shared.userCreateOrUpdate(from: user)
                         }
                         
                         let displayObject = TWKUserDO(id: user.id ?? 0,
@@ -30,13 +31,15 @@ class TWKUsersViewModel: TWKViewModel {
                                                       avatarUrl: user.avatarUrl ?? "")
                         self.users.append(displayObject)
                     }
+                    
+                    // determine last user id
+                    if let lastUser = resultUsers?.last,
+                       let lastUserId = lastUser.id {
+                        self.lastUserId = lastUserId
+                    }
+                    completion(self.users)
                 }
-                // determine last user id
-                if let lastUser = resultUsers?.last,
-                   let lastUserId = lastUser.id {
-                    self.lastUserId = lastUserId
-                }
-                completion(self.users)
+                
             })
     
     }
