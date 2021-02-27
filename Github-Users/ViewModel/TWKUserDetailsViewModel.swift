@@ -22,7 +22,10 @@ class TWKUserDetailsViewModel: TWKViewModel {
                                                          username: profile.login ?? "",
                                                          avatarUrl: profile.avatarUrl ?? "",
                                                          followers: profile.followers ?? 0,
-                                                         following: profile.following ?? 0)
+                                                         following: profile.following ?? 0,
+                                                         name: profile.name ?? "",
+                                                         company: profile.company ?? "",
+                                                         blog: profile.blog ?? "")
                     completion(displayObject)
                 }
             })

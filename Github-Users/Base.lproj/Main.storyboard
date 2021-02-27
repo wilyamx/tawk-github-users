@@ -191,8 +191,11 @@
                     <connections>
                         <outlet property="btnSave" destination="1Su-Nh-cvM" id="FGW-v3-XGb"/>
                         <outlet property="imgAvatar" destination="fpn-FX-o56" id="UQP-yt-ije"/>
+                        <outlet property="lblBlog" destination="XvM-4g-C8Z" id="pnO-xR-yta"/>
+                        <outlet property="lblCompany" destination="548-c6-EOg" id="5dh-Vt-2MO"/>
                         <outlet property="lblFollowers" destination="fxg-mM-80i" id="Sjn-ca-dO2"/>
                         <outlet property="lblFollowing" destination="jWJ-F6-ZuS" id="152-wU-34d"/>
+                        <outlet property="lblName" destination="V4q-xx-9OG" id="nSv-1i-AhU"/>
                         <outlet property="stkvDetails" destination="aUU-rU-7vX" id="cVg-a3-vdF"/>
                         <outlet property="stkvFollow" destination="D2V-hY-wfl" id="arf-Ox-a1Z"/>
                         <outlet property="txtvNotes" destination="vMo-qn-0gt" id="c89-do-Ptd"/>

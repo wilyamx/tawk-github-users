@@ -15,6 +15,10 @@ struct TWKGithubUserProfileCodable: Codable {
     
     let followers: Int32?
     let following: Int32?
+    
+    let name: String?
+    let company: String?
+    let blog: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -23,6 +27,10 @@ struct TWKGithubUserProfileCodable: Codable {
         
         case followers = "followers"
         case following = "following"
+        
+        case name = "name"
+        case company = "company"
+        case blog = "blog"
     }
     
     init(from decoder: Decoder) throws {
@@ -34,5 +42,9 @@ struct TWKGithubUserProfileCodable: Codable {
         
         self.followers = try keyedValues.decodeIfPresent(Int32.self, forKey: .followers)
         self.following = try keyedValues.decodeIfPresent(Int32.self, forKey: .following)
+        
+        self.name = try keyedValues.decodeIfPresent(String.self, forKey: .name)
+        self.company = try keyedValues.decodeIfPresent(String.self, forKey: .company)
+        self.blog = try keyedValues.decodeIfPresent(String.self, forKey: .blog)
     }
 }

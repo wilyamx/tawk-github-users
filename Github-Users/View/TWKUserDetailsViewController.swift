@@ -37,6 +37,11 @@ class TWKUserDetailsViewController: TWKViewController {
     @IBOutlet weak var stkvFollow: UIStackView!
     @IBOutlet weak var lblFollowers: UILabel!
     @IBOutlet weak var lblFollowing: UILabel!
+    
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblCompany: UILabel!
+    @IBOutlet weak var lblBlog: UILabel!
+    
     @IBOutlet weak var btnSave: UIButton!
 
     @IBOutlet weak var stkvDetails: UIStackView!
@@ -88,6 +93,11 @@ class TWKUserDetailsViewController: TWKViewController {
         
         self.followersCount = 0
         self.followingCount = 0
+        
+        self.lblName.text = "Name:"
+        self.lblCompany.text = "Company:"
+        self.lblBlog.text = "Blog:"
+        
         self.getUserProfile()
     }
     
@@ -101,6 +111,19 @@ class TWKUserDetailsViewController: TWKViewController {
                     DispatchQueue.main.async {
                         self.followersCount = profile.followers
                         self.followingCount = profile.following
+                        
+                        self.highlightFollowCount(
+                            message: "Name: \(profile.name)",
+                            highlightedString: "\(profile.name)",
+                            label: self.lblName)
+                        self.highlightFollowCount(
+                            message: "Company: \(profile.company)",
+                            highlightedString: "\(profile.company)",
+                            label: self.lblCompany)
+                        self.highlightFollowCount(
+                            message: "Blog: \(profile.blog)",
+                            highlightedString: "\(profile.blog)",
+                            label: self.lblBlog)
                     }
                 })
         }
