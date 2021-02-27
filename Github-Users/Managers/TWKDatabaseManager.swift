@@ -100,11 +100,9 @@ class TWKDatabaseManager {
         return nil
     }
     
-    // MARK: - Managed Note
-    
-    public func userCreateOrUpdateNote(userId: Int32, message: String) {
+    public func userCreateOrUpdateNote(userId: Int32, message: String) -> String? {
         let user = self.getUserById(userId: userId)
-        guard let managedUser = user as? User else { return }
+        guard let managedUser = user as? User else { return nil }
         
         let context = self.localDB.viewContext
         
@@ -113,9 +111,11 @@ class TWKDatabaseManager {
             managedNote.setValue(message, forKey: "message")
             do {
                 try context.save()
+                return message
             }
             catch let error {
                 DebugInfoKey.error.log(info: "Failed update note for userId (\(userId)) :: \(error.localizedDescription)")
+                return nil
             }
         }
         // no associated note (create)
@@ -126,9 +126,11 @@ class TWKDatabaseManager {
             managedUser.note = note
             do {
                 try context.save()
+                return message
             }
             catch let error {
                 DebugInfoKey.error.log(info: "Failed create note for userId (\(userId)) :: \(error.localizedDescription)")
+                return nil
             }
         }
     }

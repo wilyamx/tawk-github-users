@@ -32,6 +32,7 @@ class TWKUserDetailsViewController: TWKViewController {
         }
     }
     private var blogUrlRange: NSRange? = nil
+    private var savedNote: String = ""
     
     @IBOutlet weak var imgAvatar: UIImageView!
 
@@ -53,7 +54,9 @@ class TWKUserDetailsViewController: TWKViewController {
     // MARK: - Actions
     
     @IBAction func saveAction(_ sender: Any) {
-        guard self.txtvNotes.text.count > 0 else { return }
+        // allow save note if there's a changes in the note value
+        guard self.txtvNotes.text.count > 0,
+              self.txtvNotes.text != self.savedNote else { return }
         
         TWKPopupManager.shared.popUpConfirmation(
             presenter: self,
@@ -63,7 +66,10 @@ class TWKUserDetailsViewController: TWKViewController {
                 if let displayObject = self.userDisplayObject {
                     self.viewModel.userCreateOrUpdateNote(
                         userId: displayObject.id,
-                        message: self.txtvNotes.text)
+                        message: self.txtvNotes.text,
+                        completion: { displayObject in
+                            self.savedNote = displayObject.message
+                        })
                 }
             })
     }
@@ -167,6 +173,7 @@ class TWKUserDetailsViewController: TWKViewController {
                 completion: { displayObject in
                     DispatchQueue.main.async {
                         self.txtvNotes.text = displayObject.message
+                        self.savedNote = displayObject.message
                     }
                 })
         }

@@ -35,6 +35,7 @@ class TWKUserDetailsViewModel: TWKViewModel {
     func getNote(
         userId: Int32,
         completion: @escaping (TWKNoteDO) -> ()) {
+        
         if let managedUser = TWKDatabaseManager.shared.getUserById(userId: userId),
            let user = managedUser as? User {
             completion(TWKNoteDO(message: user.note?.message ?? ""))
@@ -43,9 +44,14 @@ class TWKUserDetailsViewModel: TWKViewModel {
     
     func userCreateOrUpdateNote(
         userId: Int32,
-        message: String) {
-        TWKDatabaseManager.shared.userCreateOrUpdateNote(
+        message: String,
+        completion: @escaping (TWKNoteDO) -> ()) {
+        
+        if let message = TWKDatabaseManager.shared.userCreateOrUpdateNote(
             userId: userId,
-            message: message)
+            message: message) {
+            completion(TWKNoteDO(message: message))
+        }
+        
     }
 }
