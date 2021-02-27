@@ -125,6 +125,7 @@ class TWKUserDetailsViewController: TWKViewController {
         
         self.getUserProfile()
         self.getNote()
+        self.seenUser()
     }
     
     // MARK: - Private Methods
@@ -175,6 +176,16 @@ class TWKUserDetailsViewController: TWKViewController {
                         self.txtvNotes.text = displayObject.message
                         self.savedNote = displayObject.message
                     }
+                })
+        }
+    }
+    
+    private func seenUser() {
+        if let userDO = self.userDisplayObject {
+            self.viewModel.userSeenProfile(
+                userId: userDO.id,
+                completion: {
+                    
                 })
         }
     }

@@ -50,6 +50,10 @@ used for writing data.
 any time.
 6. ~~Coordinator and/or MVVM patterns are used.~~
 7. ~~Users list UI must be done in code and Profile - with Interface Builder.~~
-8. Items in users list are greyed out a bit for seen profiles (seen status being saved to
-db).
+8. ~~Items in users list are greyed out a bit for seen profiles (seen status being saved to
+db).~~
 9. The app has to support ​dark mode.​
+
+## Additional Features
+
+1. ~~Tappable blog url from user profile.~~

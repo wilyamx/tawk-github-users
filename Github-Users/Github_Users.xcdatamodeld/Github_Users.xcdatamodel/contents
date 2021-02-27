@@ -8,10 +8,11 @@
         <attribute name="avatarUrl" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="login" optional="YES" attributeType="String"/>
+        <attribute name="seen" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="user" inverseEntity="Note"/>
     </entity>
     <elements>
-        <element name="User" positionX="-54" positionY="-9" width="128" height="103"/>
         <element name="Note" positionX="291.46484375" positionY="68.44140625" width="128" height="73"/>
+        <element name="User" positionX="-54" positionY="-9" width="128" height="118"/>
     </elements>
 </model>

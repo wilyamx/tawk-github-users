@@ -51,6 +51,13 @@ class TWKUserDetailsViewModel: TWKViewModel {
             message: message) {
             completion(TWKNoteDO(message: message))
         }
+    }
+    
+    func userSeenProfile(
+        userId: Int32,
+        completion: @escaping () -> ()) {
         
+        TWKDatabaseManager.shared.seenUser(userId: userId)
+        completion()
     }
 }

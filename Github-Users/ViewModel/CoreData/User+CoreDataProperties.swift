@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Github-Users
 //
-//  Created by William S. Rena on 2/27/21.
+//  Created by William S. Rena on 2/28/21.
 //  Copyright © 2021 Tawk.to. All rights reserved.
 //
 //
@@ -20,6 +20,7 @@ extension User {
     @NSManaged public var avatarUrl: String?
     @NSManaged public var id: Int32
     @NSManaged public var login: String?
+    @NSManaged public var seen: Bool
     @NSManaged public var note: Note?
 
 }

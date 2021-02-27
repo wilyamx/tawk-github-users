@@ -28,7 +28,8 @@ class TWKUserTableViewCell: UITableViewCell {
   
     override func awakeFromNib() {
         super.awakeFromNib()
-          
+        self.contentView.backgroundColor = .white
+        
         self.viewBg.backgroundColor = .clear
         self.viewUsername.backgroundColor = .clear
 
@@ -78,5 +79,7 @@ class TWKUserTableViewCell: UITableViewCell {
         }
         
         self.imgNote.isHidden = !(displayObject.hasNote ?? false)
+        
+        self.contentView.backgroundColor = displayObject.hasSeen ?? false ? UIColor.lightGray : UIColor.white
     }
 }

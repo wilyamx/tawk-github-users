@@ -153,4 +153,18 @@ class TWKDatabaseManager {
         }
     }
     
+    public func seenUser(userId: Int32) {
+        let user = self.getUserById(userId: userId)
+        guard let managedUser = user as? User else { return }
+        
+        let context = self.localDB.viewContext
+        
+        managedUser.seen = true
+        do {
+            try context.save()
+        }
+        catch let error {
+            DebugInfoKey.error.log(info: "Failed update user seen status for userId (\(userId)) :: \(error.localizedDescription)")
+        }
+    }
 }

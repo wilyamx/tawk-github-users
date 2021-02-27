@@ -52,7 +52,7 @@ class TWKUsersViewController: TWKViewController {
         self.tblUsers.delegate = self
         self.tblUsers.tableHeaderView = UIView()
         self.tblUsers.tableFooterView = UIView()
-        self.tblUsers.separatorStyle = .none
+        self.tblUsers.separatorStyle = .singleLine
         self.tblUsers.backgroundColor = .white
         
         self.searchController.searchResultsUpdater = self
@@ -73,12 +73,13 @@ class TWKUsersViewController: TWKViewController {
                     self.refreshControl.endRefreshing()
                 }
             },
-            noteStatusComplete: { users in
+            otherStatusComplete: { users in
                 DispatchQueue.main.async {
                     for user in self.users {
                         for userNoteStatus in users {
                             if user.id == userNoteStatus.id {
                                 user.hasNote = userNoteStatus.hasNote
+                                user.hasSeen = userNoteStatus.hasSeen
                                 break
                             }
                         }
@@ -100,12 +101,13 @@ class TWKUsersViewController: TWKViewController {
                     self.tblUsers.reloadData()
                 }
             },
-            noteStatusComplete: { users in
+            otherStatusComplete: { users in
                 DispatchQueue.main.async {
                     for user in self.users {
                         for userNoteStatus in users {
                             if user.id == userNoteStatus.id {
                                 user.hasNote = userNoteStatus.hasNote
+                                user.hasSeen = userNoteStatus.hasSeen
                                 break
                             }
                         }

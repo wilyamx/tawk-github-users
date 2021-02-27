@@ -14,7 +14,7 @@ class TWKUsersViewModel: TWKViewModel {
     
     func pullDown(
         completion: @escaping ([TWKUserDO]) -> (),
-        noteStatusComplete: @escaping ([TWKUserDO]) -> ()) {
+        otherStatusComplete: @escaping ([TWKUserDO]) -> ()) {
         self.lastUserId = 1
         
         TWKNetworkManager.shared.getUsers(
@@ -35,6 +35,7 @@ class TWKUsersViewModel: TWKViewModel {
                     }
                     
                     // get users note statuses
+                    // get users seen statuses
                     let userIds = users.map({ $0.id ?? 0})
                     DispatchQueue.main.async {
                         if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
@@ -42,10 +43,11 @@ class TWKUsersViewModel: TWKViewModel {
                                 { user in TWKUserDO(id: user.id,
                                                     username: user.login ?? "",
                                                     avatarUrl: user.avatarUrl ?? "",
-                                                    hasNote: user.note != nil)
+                                                    hasNote: user.note != nil,
+                                                    hasSeen: user.seen)
                                     
                                 })
-                            noteStatusComplete(usersNoteStatus)
+                            otherStatusComplete(usersNoteStatus)
                         }
                     }
                     
@@ -63,7 +65,7 @@ class TWKUsersViewModel: TWKViewModel {
     
     func pullUp(
         completion: @escaping ([TWKUserDO]) -> (),
-        noteStatusComplete: @escaping ([TWKUserDO]) -> ()) {
+        otherStatusComplete: @escaping ([TWKUserDO]) -> ()) {
         
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
@@ -83,6 +85,7 @@ class TWKUsersViewModel: TWKViewModel {
                     }
                     
                     // get users note statuses
+                    // get users seen statuses
                     let userIds = users.map({ $0.id ?? 0})
                     DispatchQueue.main.async {
                         if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
@@ -90,10 +93,11 @@ class TWKUsersViewModel: TWKViewModel {
                                 { user in TWKUserDO(id: user.id,
                                                     username: user.login ?? "",
                                                     avatarUrl: user.avatarUrl ?? "",
-                                                    hasNote: user.note != nil)
+                                                    hasNote: user.note != nil,
+                                                    hasSeen: user.seen)
                                     
                                 })
-                            noteStatusComplete(usersNoteStatus)
+                            otherStatusComplete(usersNoteStatus)
                         }
                     }
                     
