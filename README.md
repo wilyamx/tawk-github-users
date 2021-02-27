@@ -15,8 +15,7 @@ data should be displayed first, then (in parallel) new data should be fetched fr
 3. ~~Page size​ has to be dynamically determined after the first batch is loaded.~~
 4. ~~The list has to display a spinner while loading data as the last list item.~~
 5. ~~Every fourth avatar's colour should have its colours inverted.~~
-6. List item view should have a note icon if there is note information saved for the given
-user.
+6. ~~List item view should have a note icon if there is note information saved for the given user.~~
 7. ~~Users list has to be searchable - local search only; in ​search mode,​ there is no
 pagination; username and note (see Profile section) fields should be used when
 searching; precise match as well as ​contains s​ hould be used.~~
@@ -27,7 +26,7 @@ searching; precise match as well as ​contains s​ hould be used.~~
 
 1. ~~Profile info can be obtained from ​`https://api.github.com/users/[​username]​` in JSON format~~​
 2. ~~The view should have the user's avatar as a header view followed by information fields (UIX is up to you)~~
-3. The section must have the possibility to retrieve and save back to the database the Note​data (not available in GitHub api; local database only).
+3. ~~The section must have the possibility to retrieve and save back to the database the Note​data (not available in GitHub api; local database only).~~
 
 ## Submit your work
 

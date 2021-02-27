@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
