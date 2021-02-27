@@ -65,9 +65,9 @@ class TWKUsersViewController: TWKViewController {
     
     private func getUsers() {
         self.viewModel.pullDown(completion: { users in
-            self.users = users
-            
             DispatchQueue.main.async {
+                self.users = users
+                
                 self.tblUsers.reloadData()
                 self.refreshControl.endRefreshing()
             }
