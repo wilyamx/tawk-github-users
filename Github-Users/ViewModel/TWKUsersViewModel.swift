@@ -53,9 +53,14 @@ class TWKUsersViewModel: TWKViewModel {
                 if let users = resultUsers {
                     self.users.removeAll()
                     for user in users {
-                        self.users.append(TWKUserDO(id: user.id ?? 0,
-                                                    username: user.login ?? "",
-                                                    avatarUrl: user.avatarUrl ?? ""))
+                        DispatchQueue.main.async {
+                            TWKDatabaseManager.shared.userCreateOrUpdate(from: user)
+                        }
+                        
+                        let displayObject = TWKUserDO(id: user.id ?? 0,
+                                                      username: user.login ?? "",
+                                                      avatarUrl: user.avatarUrl ?? "")
+                        self.users.append(displayObject)
                     }
                 }
                 // determine last user id

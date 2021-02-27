@@ -22,7 +22,7 @@ class TWKNetworkManager {
     static let shared = TWKNetworkManager()
     
     static let BASE_URL = "https://api.github.com"
-    static let PAGE_SIZE = 5
+    static let PAGE_SIZE = 15
     
     // MARK: - Public Methods
     
