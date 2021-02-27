@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class TWKUserDetailsViewModel: TWKViewModel {
     
     func getUserProfile(
         username: String,
-        completion: @escaping (TWKUserProfileDO) -> () ) {
+        completion: @escaping (TWKUserProfileDO) -> ()) {
         
         TWKNetworkManager.shared.getUserProfile(
             username: username,
@@ -29,5 +30,22 @@ class TWKUserDetailsViewModel: TWKViewModel {
                     completion(displayObject)
                 }
             })
+    }
+    
+    func getNote(
+        userId: Int32,
+        completion: @escaping (TWKNoteDO) -> ()) {
+        if let managedUser = TWKDatabaseManager.shared.getUserById(userId: userId),
+           let user = managedUser as? User {
+            completion(TWKNoteDO(message: user.note?.message ?? ""))
+        }
+    }
+    
+    func userCreateOrUpdateNote(
+        userId: Int32,
+        message: String) {
+        TWKDatabaseManager.shared.userCreateOrUpdateNote(
+            userId: userId,
+            message: message)
     }
 }

@@ -17,7 +17,7 @@ extension Note {
         return NSFetchRequest<Note>(entityName: "Note")
     }
 
-    @NSManaged public var message: Int32
+    @NSManaged public var message: String
     @NSManaged public var user: User?
 
 }

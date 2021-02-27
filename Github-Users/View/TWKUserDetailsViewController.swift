@@ -53,7 +53,19 @@ class TWKUserDetailsViewController: TWKViewController {
     // MARK: - Actions
     
     @IBAction func saveAction(_ sender: Any) {
-
+        guard self.txtvNotes.text.count > 0 else { return }
+        
+        TWKPopupManager.shared.popUpConfirmation(
+            presenter: self,
+            title: "Alert",
+            message: "Save current note changes?",
+            confirmed: {
+                if let displayObject = self.userDisplayObject {
+                    self.viewModel.userCreateOrUpdateNote(
+                        userId: displayObject.id,
+                        message: self.txtvNotes.text)
+                }
+            })
     }
   
     // MARK: - View Controller Life Cycle
@@ -73,6 +85,7 @@ class TWKUserDetailsViewController: TWKViewController {
         self.viewNotesBg.backgroundColor = .clear
         self.txtvNotes.layer.borderWidth = 1.0
         self.txtvNotes.layer.borderColor = UIColor.black.cgColor
+        self.txtvNotes.text = ""
         
         if let displayObject = self.userDisplayObject {
             self.title = displayObject.username
@@ -105,6 +118,7 @@ class TWKUserDetailsViewController: TWKViewController {
         self.btnSave.titleLabel?.font = UIFont.setBold(fontSize: 18.0)
         
         self.getUserProfile()
+        self.getNote()
     }
     
     // MARK: - Private Methods
@@ -146,6 +160,18 @@ class TWKUserDetailsViewController: TWKViewController {
         
     }
     
+    private func getNote() {
+        if let userDO = self.userDisplayObject {
+            self.viewModel.getNote(
+                userId: userDO.id,
+                completion: { displayObject in
+                    DispatchQueue.main.async {
+                        self.txtvNotes.text = displayObject.message
+                    }
+                })
+        }
+    }
+    
     private func highlightFollowCount(
         message: String,
         highlightedString: String,
@@ -168,6 +194,10 @@ class TWKUserDetailsViewController: TWKViewController {
         attributedString.addAttributes(boldAttribute as [NSAttributedString.Key : Any], range: highlightRange)
         
         label.attributedText = attributedString
+    }
+    
+    private func saveNote() {
+        
     }
     
     // MARK: - Handlers

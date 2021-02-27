@@ -32,6 +32,7 @@
 		A253701F25EA521100E83849 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253701B25EA521100E83849 /* User+CoreDataProperties.swift */; };
 		A253702025EA521100E83849 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253701C25EA521100E83849 /* Note+CoreDataClass.swift */; };
 		A253702125EA521100E83849 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253701D25EA521100E83849 /* Note+CoreDataProperties.swift */; };
+		A253703225EA758B00E83849 /* TWKNoteDO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253703125EA758B00E83849 /* TWKNoteDO.swift */; };
 		A263417225E89556006EC26A /* TWKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417125E89556006EC26A /* TWKNetworkManager.swift */; };
 		A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */; };
 		A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419325E912DB006EC26A /* UIImageView+Extension.swift */; };
@@ -92,6 +93,7 @@
 		A253701B25EA521100E83849 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A253701C25EA521100E83849 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A253701D25EA521100E83849 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A253703125EA758B00E83849 /* TWKNoteDO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKNoteDO.swift; sourceTree = "<group>"; };
 		A263417125E89556006EC26A /* TWKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKNetworkManager.swift; sourceTree = "<group>"; };
 		A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubUserCodable.swift; sourceTree = "<group>"; };
 		A263419325E912DB006EC26A /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				A210726525E7A0F8006250FA /* TWKDisplayObject.swift */,
 				A210726D25E7A122006250FA /* TWKUserDO.swift */,
 				A26341AA25E96229006EC26A /* TWKUserProfileDO.swift */,
+				A253703125EA758B00E83849 /* TWKNoteDO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				A2536F6F25E9E34100E83849 /* UITapGestureRecognizer+Extension.swift in Sources */,
 				A26341A325E95A81006EC26A /* TWKGithubUserProfileCodable.swift in Sources */,
 				A263419925E9160B006EC26A /* UIImage+Extension.swift in Sources */,
+				A253703225EA758B00E83849 /* TWKNoteDO.swift in Sources */,
 				A253701E25EA521100E83849 /* User+CoreDataClass.swift in Sources */,
 				A253700425EA249100E83849 /* TWKPopupManager.swift in Sources */,
 				A210725325E7940D006250FA /* TWKUsersViewController.swift in Sources */,
