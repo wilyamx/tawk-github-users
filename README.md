@@ -25,7 +25,7 @@ searching; precise match as well as ​contains s​ hould be used.~~
 
 ## Profile
 
-1. ~~Profile info can be obtained from ​https://api.github.com/users/[​username]​in JSON format (e.g. ​https://api.github.com/users/tawk)~~​
+1. ~~Profile info can be obtained from ​`https://api.github.com/users/[​username]​` in JSON format (e.g. ​https://api.github.com/users/tawk)~~​
 2. ~~The view should have the user's avatar as a header view followed by information fields (UIX is up to you)~~
 3. The section must have the possibility to retrieve and save back to the database the Note​data (not available in GitHub api; local database only).
 
