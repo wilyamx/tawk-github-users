@@ -10,12 +10,12 @@ import Foundation
 
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
-    private var lastUserId: Int32 = 1
+    private var lastUserId: Int32 = 0
     
     func pullDown(
         completion: @escaping ([TWKUserDO]) -> (),
         otherStatusComplete: @escaping ([TWKUserDO]) -> ()) {
-        self.lastUserId = 1
+        self.lastUserId = 0
         
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
