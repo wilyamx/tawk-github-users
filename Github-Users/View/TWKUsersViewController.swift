@@ -12,18 +12,19 @@ class TWKUsersViewController: TWKViewController {
     
     @IBOutlet weak var tblUsers: UITableView!
   
-    public lazy var viewModel = TWKUsersViewModel()
+    private lazy var viewModel = TWKUsersViewModel()
     private var users: [TWKUserDO] = [TWKUserDO]()
     private var usersFiltered: [TWKUserDO] = [TWKUserDO]()
     
     private let searchController = UISearchController(searchResultsController: nil)
-    
     private var isSearchBarEmpty: Bool {
         return self.searchController.searchBar.text?.isEmpty ?? true
     }
     private var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
+    
+    
     
     // MARK: - View Controller Life Cycle
     
@@ -143,6 +144,7 @@ class TWKUsersViewController: TWKViewController {
            let displayObject = sender as? TWKUserDO,
            segue.identifier == TWKScreen.userDetails.segueIdentifier {
             vc.userDisplayObject = displayObject
+            vc.delegate = self
         }
     }
 
@@ -171,7 +173,8 @@ extension TWKUsersViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.configureViewCell(displayObject: data, indexPath: indexPath)
         cell.showDetailsHandler = { [unowned self] displayObject in
-            self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier, sender: displayObject)
+            self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier,
+                              sender: displayObject)
         }
         return cell
     }
@@ -214,4 +217,25 @@ extension TWKUsersViewController: UISearchResultsUpdating {
             self.filterContentForSearchText(searchText)
         }
     }
+}
+
+extension TWKUsersViewController: TWKUsersViewProtocol {
+    func updateNoteStatus(displayObject: TWKUserDO) {
+        if let displayObject = self.users.first(where: { $0.id == displayObject.id }) {
+            DispatchQueue.main.async {
+                displayObject.hasNote = true
+                self.tblUsers.reloadData()
+            }
+        }
+    }
+    
+    func updateSeenStatus(displayObject: TWKUserDO) {
+        if let displayObject = self.users.first(where: { $0.id == displayObject.id }) {
+            DispatchQueue.main.async {
+                displayObject.hasSeen = true
+                self.tblUsers.reloadData()
+            }
+        }
+    }
+    
 }

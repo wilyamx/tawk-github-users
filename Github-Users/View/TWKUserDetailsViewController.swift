@@ -12,7 +12,9 @@ class TWKUserDetailsViewController: TWKViewController {
 
     public lazy var viewModel = TWKUserDetailsViewModel()
     public var userDisplayObject: TWKUserDO?
-
+    
+    public var delegate: TWKUsersViewProtocol?
+    
     private var followersCount: Int32 = 0 {
         didSet {
             let message = "followers: \(followersCount)"
@@ -67,8 +69,11 @@ class TWKUserDetailsViewController: TWKViewController {
                     self.viewModel.userCreateOrUpdateNote(
                         userId: displayObject.id,
                         message: self.txtvNotes.text,
-                        completion: { displayObject in
-                            self.savedNote = displayObject.message
+                        completion: { noteDisplayObject in
+                            self.savedNote = noteDisplayObject.message
+
+                            self.delegate?.updateNoteStatus(displayObject: displayObject)
+                            self.navigationController?.popViewController(animated: true)
                         })
                 }
             })
@@ -185,7 +190,7 @@ class TWKUserDetailsViewController: TWKViewController {
             self.viewModel.userSeenProfile(
                 userId: userDO.id,
                 completion: {
-                    
+                    self.delegate?.updateSeenStatus(displayObject: userDO)
                 })
         }
     }
@@ -243,3 +248,4 @@ class TWKUserDetailsViewController: TWKViewController {
     */
 
 }
+
