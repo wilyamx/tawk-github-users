@@ -10,12 +10,22 @@ import Foundation
 
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
+    
+    // for apis
     private var lastUserId: Int32 = 0
+    
+    // for database
+    private var offset: Int = 0
     
     func pullDown(
         completion: @escaping ([TWKUserDO]) -> (),
         otherStatusComplete: @escaping ([TWKUserDO]) -> ()) {
         self.lastUserId = 0
+        
+//        if let managedUsers = TWKDatabaseManager.shared.getUsers(
+//            offset: self.offset,
+//            limit: TWKNetworkManager.PAGE_SIZE) as? [User] {
+//        }
         
         TWKNetworkManager.shared.getUsers(
             lastUserId: self.lastUserId,
@@ -39,7 +49,7 @@ class TWKUsersViewModel: TWKViewModel {
                     let userIds = users.map({ $0.id ?? 0})
                     DispatchQueue.main.async {
                         if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
-                            let usersNoteStatus = managedUsers.map(
+                            let usersOtherStatus = managedUsers.map(
                                 { user in TWKUserDO(id: user.id,
                                                     username: user.login ?? "",
                                                     avatarUrl: user.avatarUrl ?? "",
@@ -47,7 +57,7 @@ class TWKUsersViewModel: TWKViewModel {
                                                     hasSeen: user.seen)
                                     
                                 })
-                            otherStatusComplete(usersNoteStatus)
+                            otherStatusComplete(usersOtherStatus)
                         }
                     }
                     
@@ -89,7 +99,7 @@ class TWKUsersViewModel: TWKViewModel {
                     let userIds = users.map({ $0.id ?? 0})
                     DispatchQueue.main.async {
                         if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
-                            let usersNoteStatus = managedUsers.map(
+                            let usersOtherStatus = managedUsers.map(
                                 { user in TWKUserDO(id: user.id,
                                                     username: user.login ?? "",
                                                     avatarUrl: user.avatarUrl ?? "",
@@ -97,7 +107,7 @@ class TWKUsersViewModel: TWKViewModel {
                                                     hasSeen: user.seen)
                                     
                                 })
-                            otherStatusComplete(usersNoteStatus)
+                            otherStatusComplete(usersOtherStatus)
                         }
                     }
                     
@@ -112,4 +122,6 @@ class TWKUsersViewModel: TWKViewModel {
             })
     
     }
+    
+
 }

@@ -28,6 +28,29 @@ class TWKDatabaseManager {
     
     // MARK: - Managed User
         
+    public func getUsers(offset: Int, limit: Int) -> [NSManagedObject]? {
+        let context = self.localDB.viewContext
+
+        // sorting
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        
+        let fetchRequest:NSFetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "User")
+        fetchRequest.fetchLimit = limit
+        fetchRequest.fetchOffset = offset
+        fetchRequest.sortDescriptors = sortDescriptors
+        
+        var items: [Any] = []
+        do {
+            items = try context.fetch(fetchRequest)
+            return items as? [NSManagedObject]
+        }
+        catch let error {
+            DebugInfoKey.error.log(info: "Fetch users from offset=\(offset) :: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
     public func userCreateOrUpdate(from codableModel: TWKGithubUserCodable) {
         guard let primaryKey = codableModel.id else { return }
 
