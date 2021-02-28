@@ -21,56 +21,69 @@ class TWKUsersViewModel: TWKViewModel {
         completion: @escaping ([TWKUserDO]) -> (),
         otherStatusComplete: @escaping ([TWKUserDO]) -> ()) {
         self.lastUserId = 0
+        self.offset = 0
         
-//        if let managedUsers = TWKDatabaseManager.shared.getUsers(
-//            offset: self.offset,
-//            limit: TWKNetworkManager.PAGE_SIZE) as? [User] {
-//        }
-        
-        TWKNetworkManager.shared.getUsers(
-            lastUserId: self.lastUserId,
-            completion: { resultUsers in
-                // convert codable data to display model
-                if let users = resultUsers {
-                    self.users.removeAll()
-                    for user in users {
+        if TWKNetworkManager.shared.isConnectedToNetwork() {
+            TWKNetworkManager.shared.getUsers(
+                lastUserId: self.lastUserId,
+                completion: { resultUsers in
+                    // convert codable data to display model
+                    if let users = resultUsers {
+                        self.users.removeAll()
+                        for user in users {
+                            DispatchQueue.main.async {
+                                TWKDatabaseManager.shared.userCreateOrUpdate(from: user)
+                            }
+
+                            let displayObject = TWKUserDO(id: user.id ?? 0,
+                                                          username: user.login ?? "",
+                                                          avatarUrl: user.avatarUrl ?? "")
+                            self.users.append(displayObject)
+                        }
+
+                        // get users note statuses
+                        // get users seen statuses
+                        let userIds = users.map({ $0.id ?? 0})
                         DispatchQueue.main.async {
-                            TWKDatabaseManager.shared.userCreateOrUpdate(from: user)
+                            if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
+                                let usersOtherStatus = managedUsers.map(
+                                    { user in TWKUserDO(id: user.id,
+                                                        username: user.login ?? "",
+                                                        avatarUrl: user.avatarUrl ?? "",
+                                                        hasNote: user.note != nil,
+                                                        hasSeen: user.seen)
+
+                                    })
+                                otherStatusComplete(usersOtherStatus)
+                            }
                         }
-                        
-                        let displayObject = TWKUserDO(id: user.id ?? 0,
-                                                      username: user.login ?? "",
-                                                      avatarUrl: user.avatarUrl ?? "")
-                        self.users.append(displayObject)
-                    }
-                    
-                    // get users note statuses
-                    // get users seen statuses
-                    let userIds = users.map({ $0.id ?? 0})
-                    DispatchQueue.main.async {
-                        if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {
-                            let usersOtherStatus = managedUsers.map(
-                                { user in TWKUserDO(id: user.id,
-                                                    username: user.login ?? "",
-                                                    avatarUrl: user.avatarUrl ?? "",
-                                                    hasNote: user.note != nil,
-                                                    hasSeen: user.seen)
-                                    
-                                })
-                            otherStatusComplete(usersOtherStatus)
+
+                        // determine last user id
+                        if let lastUser = resultUsers?.last,
+                           let lastUserId = lastUser.id {
+                            self.lastUserId = lastUserId
                         }
+                        completion(self.users)
                     }
-                    
-                    // determine last user id
-                    if let lastUser = resultUsers?.last,
-                       let lastUserId = lastUser.id {
-                        self.lastUserId = lastUserId
-                    }
-                    completion(self.users)
-                }
-                
+
             })
-    
+        }
+        else {
+            if let managedUsers = TWKDatabaseManager.shared.getUsers(
+                offset: self.offset,
+                limit: TWKNetworkManager.PAGE_SIZE) as? [User] {
+                
+                let usersOtherStatus = managedUsers.map(
+                    { user in TWKUserDO(id: user.id,
+                                        username: user.login ?? "",
+                                        avatarUrl: user.avatarUrl ?? "",
+                                        hasNote: user.note != nil,
+                                        hasSeen: user.seen)
+                        
+                    })
+                completion(usersOtherStatus)
+            }
+        }
     }
     
     func pullUp(

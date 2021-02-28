@@ -132,6 +132,7 @@ class TWKUsersViewController: TWKViewController {
     // MARK: - Handlers
     
     override func refreshData(_ sender: Any) {
+        self.updateOfflineIndicator()
         self.getUsers()
     }
     

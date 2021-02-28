@@ -14,9 +14,28 @@ class TWKViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.updateOfflineIndicator()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateOfflineIndicator()
+    }
+    
+    // MARK: - Private Methods
+    
+    
+    
     // MARK: - Public Methods
+    
+    public func updateOfflineIndicator() {
+        if TWKNetworkManager.shared.isConnectedToNetwork() {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+        }
+        else {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.orange]
+        }
+    }
     
     func enableRefreshControl(tableView: UITableView) {
         // Add Refresh Control to Table View
