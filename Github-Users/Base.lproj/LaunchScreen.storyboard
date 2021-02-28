@@ -15,8 +15,21 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bird-apple" translatesAutoresizingMaskIntoConstraints="NO" id="KaP-1z-UDI">
+                                <rect key="frame" x="96" y="361.5" width="222" height="183"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="222" id="a5j-uf-W3V"/>
+                                    <constraint firstAttribute="height" constant="183" id="uWw-nG-DN1"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KaP-1z-UDI" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6fx-T3-DCl"/>
+                            <constraint firstItem="KaP-1z-UDI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Abj-gF-yW0"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="we4-aD-rA3"/>
                 </viewController>
@@ -26,6 +39,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bird-apple" width="222" height="183"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
