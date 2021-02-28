@@ -35,7 +35,8 @@ class TWKUserTableViewCell: UITableViewCell {
 
         self.imgAvatar.backgroundColor = .white
         self.imgAvatar.layer.cornerRadius = self.imgAvatar.frame.size.height / 2.0
-
+        self.imgAvatar.image = UIImage(named: "avatar-placeholder")
+        
         self.btnDetails.setTitleColor(.darkGray, for: .normal)
         self.btnDetails.backgroundColor = .white
         self.btnDetails.layer.cornerRadius = self.btnDetails.frame.size.height / 2.0
@@ -53,6 +54,7 @@ class TWKUserTableViewCell: UITableViewCell {
         self.displayObject = displayObject
         self.lblUsername.text = displayObject.username
         
+        self.imgAvatar.image = UIImage(named: "avatar-placeholder")
         if displayObject.avatarUrl.count > 0 {
             if let url = URL(string: displayObject.avatarUrl) {
                 self.imgAvatar.load(
