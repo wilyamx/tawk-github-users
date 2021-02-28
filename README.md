@@ -2,8 +2,8 @@
 
 ## GitHub Users
 
-1. The app has to be able to work ​offline ​if data has been previously loaded.
-2. The app must handle ​no internet ​scenario, show appropriate UI indicators.
+1. ~~The app has to be able to work ​offline ​if data has been previously loaded.~~
+2. ~~The app must handle ​no internet ​scenario, show appropriate UI indicators.~~
 3. The app must ​automatically​ retry loading data once the connection is available.
 4. When there is data available (saved in the database) from previous launches, that
 data should be displayed first, then (in parallel) new data should be fetched from the backend.
