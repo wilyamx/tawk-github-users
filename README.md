@@ -16,7 +16,7 @@
 5. ~~All ​media ​has to be ​cached​ on disk.~~
 6. ~~For GitHub api requests, for image loading & caching and for CoreData integration only Apple's apis are allowed (no 3rd party libraries).~~
 7. ~~Use Codable to inflate models fetched from api.~~
-8. Write Unit tests using ​XCTest​library for data processing logic & models, CoreData
+8. Write Unit tests using ​XCTest ​library for data processing logic & models, CoreData
 models (validate creation & update).
 
 ## GitHub Users
