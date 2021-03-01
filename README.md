@@ -52,7 +52,7 @@ searching; precise match as well as ​contains s​ hould be used.~~
 1. ~~Make sure code is running on both - simulator and real device.~~
 2. ~~Push up to your repo. The repository should be publicly accessible - must not require
 any invitation to be accepted or registrations.~~
-3. Reply back to the initial email the link to your repository.
+3. ~~Reply back to the initial email the link to your repository.~~
 4. ~~Any 3rd party code that is being used has to be bundled with the code even if the
 project is using any code dependency manager.~~
 5. ~~Please indicate which bonus tasks (see next section) have you completed.~~
