@@ -55,7 +55,7 @@ class TWKUserTableViewCell: UITableViewCell {
         self.lblUsername.text = displayObject.username
         
         self.imgAvatar.image = UIImage(named: "avatar-placeholder")
-        if displayObject.avatarUrl.count > 0 {
+        if TWKNetworkManager.shared.isConnectedToNetwork() && displayObject.avatarUrl.count > 0 {
             if let url = URL(string: displayObject.avatarUrl) {
                 self.imgAvatar.load(
                     url: url,

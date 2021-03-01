@@ -12,11 +12,18 @@ import CoreData
 class TWKDatabaseManager {
     // https://stackoverflow.com/questions/40769106/errors-after-create-nsmanagedobject-subclass-for-coredata-entities
     
+    // SQLite Viewer (Chrome Extension)
+    // https://chrome.google.com/webstore/detail/sqlite-viewer/golagekponhmgfoofmlepfobdmhpajia/related?hl=en
+    
     static let shared = TWKDatabaseManager()
     
     let localDB = TWKReference.appDelegate.persistentContainer
 
     init() {
+        if let dbDescription = localDB.persistentStoreDescriptions.first,
+           let path = dbDescription.url {
+            DebugInfoKey.database.log(info: "Local database path: \(path)")
+        }
         self.initializeData()
     }
     
