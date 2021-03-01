@@ -174,16 +174,24 @@ extension TWKUsersViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.configureViewCell(displayObject: data, indexPath: indexPath)
         cell.showDetailsHandler = { [unowned self] displayObject in
-            self.viewModel.getUserProfile(
-                username: data.username,
-                completion: { profile in
-                    DispatchQueue.main.async {
-                        self.selectedProfileDisplayObject = profile
-                        self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier,
-                                          sender: displayObject)
-                    }
-                   
-                })
+            if TWKNetworkManager.shared.isConnectedToNetwork() {
+                self.viewModel.getUserProfile(
+                    username: data.username,
+                    completion: { profile in
+                        DispatchQueue.main.async {
+                            self.selectedProfileDisplayObject = profile
+                            self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier,
+                                              sender: displayObject)
+                        }
+                       
+                    })
+            }
+            else {
+                TWKPopupManager.shared.popUpErrorDetails(
+                    presenter: self,
+                    title: "Alert",
+                    message: "Something went wrong! Please check your internet connection.")
+            }
         }
         return cell
     }
