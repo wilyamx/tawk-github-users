@@ -9,7 +9,7 @@
 
 ## Generic Requirements
 
-1. Code must be done in Swift 5.1. using Xcode 12.x, target iOS13.
+1. ~~Code must be done in Swift 5.1. using Xcode 12.x, target iOS13.~~
 2. ~~Core Data​ must be used for data persisting.~~
 3. ~~UI must be done with ​UIKit ​using ​AutoLayout.~~
 4. ~~All ​network calls​ must be ​queued​ and l​imited ​to ​1 ​request at a time.~~
