@@ -58,3 +58,7 @@ db).~~
 
 1. ~~Tappable blog url from user profile.~~
 2. ~~Offline indicator. Github users title will turn to orange when offline or no internet connection.~~
+
+## Development Tools
+
+1. [SQLite Viewer](https://chrome.google.com/webstore/detail/sqlite-viewer/golagekponhmgfoofmlepfobdmhpajia/related?hl=en) for Chrome Extension
