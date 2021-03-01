@@ -177,9 +177,8 @@ extension TWKUsersViewController: UITableViewDataSource {
             self.viewModel.getUserProfile(
                 username: data.username,
                 completion: { profile in
-                    self.selectedProfileDisplayObject = profile
-                    
                     DispatchQueue.main.async {
+                        self.selectedProfileDisplayObject = profile
                         self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier,
                                           sender: displayObject)
                     }
