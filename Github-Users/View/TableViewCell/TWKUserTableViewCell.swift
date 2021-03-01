@@ -27,7 +27,7 @@ class TWKUserTableViewCell: UITableViewCell {
             self.actDetails.startAnimating()
             
             DispatchQueue.main.asyncAfter(
-                deadline: .now() + 2.0,
+                deadline: .now() + 1.0,
                 execute: {
                     self.actDetails.stopAnimating()
                     self.actDetails.isHidden = true
