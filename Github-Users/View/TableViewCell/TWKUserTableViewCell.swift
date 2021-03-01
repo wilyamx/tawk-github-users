@@ -58,6 +58,19 @@ class TWKUserTableViewCell: UITableViewCell {
         self.imgAvatar.layer.borderWidth = 0
         self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
         
+        if indexPath.row % 4 == 0 {
+            DispatchQueue.main.async {
+                self.imgAvatar.layer.borderWidth = 3.0
+                self.imgAvatar.layer.borderColor = UIColor.red.cgColor
+            }
+        }
+        else {
+            DispatchQueue.main.async {
+                self.imgAvatar.layer.borderWidth = 0
+                self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
+            }
+        }
+        
         if displayObject.avatarUrl.count > 0 {
             if let url = URL(string: displayObject.avatarUrl) {
                 self.imgAvatar.load(
@@ -68,16 +81,12 @@ class TWKUserTableViewCell: UITableViewCell {
                         if let inverseImage = image.inverseImage() {
                             DispatchQueue.main.async {
                                 self.imgAvatar.image = inverseImage
-                                self.imgAvatar.layer.borderWidth = 3.0
-                                self.imgAvatar.layer.borderColor = UIColor.red.cgColor
                             }
                         }
                     }
                     else {
                         DispatchQueue.main.async {
                             self.imgAvatar.image = image
-                            self.imgAvatar.layer.borderWidth = 0
-                            self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
                         }
                     }
                 })
