@@ -24,8 +24,6 @@ class TWKUsersViewController: TWKViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
-    
-    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {

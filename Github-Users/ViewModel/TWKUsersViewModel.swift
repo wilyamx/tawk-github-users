@@ -11,10 +11,10 @@ import Foundation
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
     
-    // for apis
+    // for gihub apis
     private var lastUserId: Int32 = 0
     
-    // for database
+    // for local database
     private var offset: Int = 0
     
     func pullDown(
@@ -59,11 +59,14 @@ class TWKUsersViewModel: TWKViewModel {
                             }
                         }
 
+                        self.offset += TWKNetworkManager.PAGE_SIZE
+                        
                         // determine last user id
                         if let lastUser = resultUsers?.last,
                            let lastUserId = lastUser.id {
                             self.lastUserId = lastUserId
                         }
+                        
                         completion(self.users)
                     }
 
@@ -83,7 +86,14 @@ class TWKUsersViewModel: TWKViewModel {
                                         hasSeen: user.seen)
                         
                     })
+                
                 self.offset += TWKNetworkManager.PAGE_SIZE
+                
+                // determine last user id
+                if let lastUser = usersOtherStatus.last {
+                    self.lastUserId = lastUser.id
+                }
+                
                 completion(usersOtherStatus)
             }
         }
@@ -128,11 +138,14 @@ class TWKUsersViewModel: TWKViewModel {
                             }
                         }
                         
+                        self.offset += TWKNetworkManager.PAGE_SIZE
+                        
                         // determine last user id
                         if let lastUser = resultUsers?.last,
                            let lastUserId = lastUser.id {
                             self.lastUserId = lastUserId
                         }
+                        
                         completion(self.users)
                     }
                     
@@ -153,7 +166,14 @@ class TWKUsersViewModel: TWKViewModel {
                                         hasSeen: user.seen)
                         
                     })
+                
                 self.offset += TWKNetworkManager.PAGE_SIZE
+                
+                // determine last user id
+                if let lastUser = usersOtherStatus.last {
+                    self.lastUserId = lastUser.id
+                }
+                
                 completion(usersOtherStatus)
             }
         }
