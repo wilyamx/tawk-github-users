@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -55,15 +56,20 @@
                                             <action selector="detailsAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pIn-Lh-c4U"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="39C-Ha-hJV">
+                                        <rect key="frame" x="65" y="30" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstItem="YBJ-w7-seK" firstAttribute="top" secondItem="0BH-wM-7pQ" secondAttribute="top" id="4mq-bI-ev5"/>
                                     <constraint firstItem="btW-Lq-OFW" firstAttribute="leading" secondItem="0BH-wM-7pQ" secondAttribute="leading" id="7MV-h2-jUC"/>
                                     <constraint firstAttribute="trailing" secondItem="YBJ-w7-seK" secondAttribute="trailing" id="BvZ-ea-fhU"/>
+                                    <constraint firstItem="39C-Ha-hJV" firstAttribute="centerY" secondItem="btW-Lq-OFW" secondAttribute="centerY" id="CBZ-FR-7rt"/>
                                     <constraint firstAttribute="height" constant="50" id="PH2-41-gzz"/>
                                     <constraint firstItem="YBJ-w7-seK" firstAttribute="leading" secondItem="0BH-wM-7pQ" secondAttribute="leading" id="RUd-SF-CJE"/>
                                     <constraint firstItem="YBJ-w7-seK" firstAttribute="leading" secondItem="0BH-wM-7pQ" secondAttribute="leading" id="SWf-oz-aZj"/>
+                                    <constraint firstItem="39C-Ha-hJV" firstAttribute="leading" secondItem="btW-Lq-OFW" secondAttribute="trailing" constant="5" id="Y58-bq-B6k"/>
                                     <constraint firstItem="YBJ-w7-seK" firstAttribute="leading" secondItem="0BH-wM-7pQ" secondAttribute="leading" id="leZ-5g-Lcm"/>
                                     <constraint firstAttribute="bottom" secondItem="btW-Lq-OFW" secondAttribute="bottom" id="nzl-an-2cR"/>
                                     <constraint firstAttribute="trailing" secondItem="YBJ-w7-seK" secondAttribute="trailing" id="rhx-aC-Ec9"/>
@@ -102,6 +108,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="actDetails" destination="39C-Ha-hJV" id="VFT-0H-TEC"/>
                 <outlet property="btnDetails" destination="btW-Lq-OFW" id="Sob-qT-bUQ"/>
                 <outlet property="imgAvatar" destination="3oV-tn-GKT" id="x7T-KT-4lp"/>
                 <outlet property="imgNote" destination="hkf-sK-sjL" id="gK3-bQ-Vpt"/>

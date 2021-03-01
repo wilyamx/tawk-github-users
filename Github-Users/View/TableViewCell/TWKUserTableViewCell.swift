@@ -16,12 +16,23 @@ class TWKUserTableViewCell: UITableViewCell {
     @IBOutlet weak var imgNote: UIImageView!
     @IBOutlet weak var viewUsername: UIView!
     @IBOutlet weak var btnDetails: UIButton!
+    @IBOutlet weak var actDetails: UIActivityIndicatorView!
     
     var displayObject: TWKUserDO?
     var showDetailsHandler: ((TWKUserDO) -> Void)?
     @IBAction func detailsAction(_ sender: Any) {
         if let handler = self.showDetailsHandler,
            let displayObject = self.displayObject {
+            self.actDetails.isHidden = false
+            self.actDetails.startAnimating()
+            
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + 2.0,
+                execute: {
+                    self.actDetails.stopAnimating()
+                    self.actDetails.isHidden = true
+                })
+            
             handler(displayObject)
         }
     }
@@ -44,6 +55,7 @@ class TWKUserTableViewCell: UITableViewCell {
         self.btnDetails.layer.borderColor = UIColor.darkGray.cgColor
         
         self.imgNote.isHidden = true
+        self.actDetails.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

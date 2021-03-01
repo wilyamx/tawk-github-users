@@ -11,7 +11,7 @@ import UIKit
 class TWKUserDetailsViewController: TWKViewController {
 
     public lazy var viewModel = TWKUserDetailsViewModel()
-    public var userDisplayObject: TWKUserDO?
+    public var userProfileDisplayObject: TWKUserProfileDO?
     
     public var delegate: TWKUsersViewProtocol?
     
@@ -65,7 +65,7 @@ class TWKUserDetailsViewController: TWKViewController {
             title: "Alert",
             message: "Save current note changes?",
             confirmed: {
-                if let displayObject = self.userDisplayObject {
+                if let displayObject = self.userProfileDisplayObject {
                     self.viewModel.userCreateOrUpdateNote(
                         userId: displayObject.id,
                         message: self.txtvNotes.text,
@@ -98,7 +98,7 @@ class TWKUserDetailsViewController: TWKViewController {
         self.txtvNotes.layer.borderColor = UIColor.black.cgColor
         self.txtvNotes.text = ""
         
-        if let displayObject = self.userDisplayObject {
+        if let displayObject = self.userProfileDisplayObject {
             self.title = displayObject.username
             
             if displayObject.avatarUrl.count > 0 {
@@ -128,7 +128,36 @@ class TWKUserDetailsViewController: TWKViewController {
         self.btnSave.setTitleColor(.white, for: .normal)
         self.btnSave.titleLabel?.font = UIFont.setBold(fontSize: 18.0)
         
-        self.getUserProfile()
+        if let userDO = self.userProfileDisplayObject {
+            DispatchQueue.main.async {
+                self.followersCount = userDO.followers
+                self.followingCount = userDO.following
+                
+                self.highlightFollowCount(
+                    message: "Name: \(userDO.name)",
+                    highlightedString: "\(userDO.name)",
+                    label: self.lblName)
+                self.highlightFollowCount(
+                    message: "Company: \(userDO.company)",
+                    highlightedString: "\(userDO.company)",
+                    label: self.lblCompany)
+                self.highlightFollowCount(
+                    message: "Blog: \(userDO.blog)",
+                    highlightedString: "\(userDO.blog)",
+                    label: self.lblBlog)
+                
+                // blog url tap gesture
+                self.lblBlog.isUserInteractionEnabled = true
+                if let blogText = self.lblBlog.text {
+                    self.blogUrlRange = (blogText as NSString).range(of: userDO.blog)
+                }
+                let tapGesture = UITapGestureRecognizer(
+                    target: self,
+                    action: #selector(self.blogUrlHandler(gesture:)))
+                self.lblBlog.addGestureRecognizer(tapGesture)
+            }
+        }
+        
         self.getNote()
         self.seenUser()
     }
@@ -136,7 +165,7 @@ class TWKUserDetailsViewController: TWKViewController {
     // MARK: - Private Methods
     
     private func getUserProfile() {
-        if let userDO = self.userDisplayObject {
+        if let userDO = self.userProfileDisplayObject {
             self.viewModel.getUserProfile(
                 username: userDO.username,
                 completion: { [unowned self] profile in
@@ -173,7 +202,7 @@ class TWKUserDetailsViewController: TWKViewController {
     }
     
     private func getNote() {
-        if let userDO = self.userDisplayObject {
+        if let userDO = self.userProfileDisplayObject {
             self.viewModel.getNote(
                 userId: userDO.id,
                 completion: { displayObject in
@@ -186,7 +215,7 @@ class TWKUserDetailsViewController: TWKViewController {
     }
     
     private func seenUser() {
-        if let userDO = self.userDisplayObject {
+        if let userDO = self.userProfileDisplayObject {
             self.viewModel.userSeenProfile(
                 userId: userDO.id,
                 completion: {
@@ -226,6 +255,8 @@ class TWKUserDetailsViewController: TWKViewController {
     // MARK: - Handlers
     
     @objc private func blogUrlHandler(gesture: UITapGestureRecognizer) {
+        guard TWKNetworkManager.shared.isConnectedToNetwork() else { return }
+        
         if let range = self.blogUrlRange,
            gesture.didTapAttributedTextInLabel(label: self.lblBlog, inRange: range) {
             if let blogText = self.lblBlog.text {

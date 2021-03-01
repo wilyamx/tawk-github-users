@@ -24,6 +24,8 @@ class TWKUsersViewController: TWKViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    private var selectedProfileDisplayObject: TWKUserProfileDO?
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -139,10 +141,11 @@ class TWKUsersViewController: TWKViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? TWKUserDetailsViewController,
-           let displayObject = sender as? TWKUserDO,
            segue.identifier == TWKScreen.userDetails.segueIdentifier {
-            vc.userDisplayObject = displayObject
-            vc.delegate = self
+            if let profileDO = self.selectedProfileDisplayObject {
+                vc.userProfileDisplayObject = profileDO
+                vc.delegate = self
+            }
         }
     }
 
@@ -171,8 +174,17 @@ extension TWKUsersViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.configureViewCell(displayObject: data, indexPath: indexPath)
         cell.showDetailsHandler = { [unowned self] displayObject in
-            self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier,
-                              sender: displayObject)
+            self.viewModel.getUserProfile(
+                username: data.username,
+                completion: { profile in
+                    self.selectedProfileDisplayObject = profile
+                    
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: TWKScreen.userDetails.segueIdentifier,
+                                          sender: displayObject)
+                    }
+                   
+                })
         }
         return cell
     }
@@ -184,8 +196,8 @@ extension TWKUsersViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      let data = self.users[indexPath.row]
-      print("\(DebugInfoKey.users.rawValue) selected a message :: \(data.username) at index (\(indexPath.row))")
+        let data = self.users[indexPath.row]
+        print("\(DebugInfoKey.users.rawValue) selected a message :: \(data.username) at index (\(indexPath.row))")
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
