@@ -1,5 +1,24 @@
 # tawk.to iOS Practical Test
 
+## General
+
+1. ~~In the first screen, the app has to fetch GitHub users list, parse it and display in the list (using UITableView or UICollectionView).~~
+2. ~~Selecting a user has to fetch the user's profile data and open a profile view displaying the user's profile data.~~
+3. ~~The design must loosely follow the wireframe (at the bottom of this document).~~
+4. ~~Own code logic should be commented on.~~
+
+## Generic Requirements
+
+1. Code must be done in Swift 5.1. using Xcode 12.x, target iOS13.
+2. ~~Core Data​ must be used for data persisting.~~
+3. ~~UI must be done with ​UIKit ​using ​AutoLayout.~~
+4. ~~All ​network calls​ must be ​queued​ and l​imited ​to ​1 ​request at a time.~~
+5. ~~All ​media ​has to be ​cached​ on disk.~~
+6. ~~For GitHub api requests, for image loading & caching and for CoreData integration only Apple's apis are allowed (no 3rd party libraries).~~
+7. ~~Use Codable to inflate models fetched from api.~~
+8. Write Unit tests using ​XCTest​library for data processing logic & models, CoreData
+models (validate creation & update).
+
 ## GitHub Users
 
 1. ~~The app has to be able to work ​offline ​if data has been previously loaded.~~
