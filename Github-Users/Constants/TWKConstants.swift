@@ -17,6 +17,7 @@ public enum DebugInfoKey: String {
     case users = "[USERS]>>"
     case api = "[API]>>"
     case error = "[ERROR]>>"
+    case cache = "[CACHE]>>"
     
     func log(info: String) {
         print("\(self.rawValue) \(info)")

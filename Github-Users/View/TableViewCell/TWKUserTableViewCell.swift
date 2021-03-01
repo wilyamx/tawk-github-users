@@ -55,27 +55,31 @@ class TWKUserTableViewCell: UITableViewCell {
         self.lblUsername.text = displayObject.username
         
         self.imgAvatar.image = UIImage(named: "avatar-placeholder")
-        if TWKNetworkManager.shared.isConnectedToNetwork() && displayObject.avatarUrl.count > 0 {
+        self.imgAvatar.layer.borderWidth = 0
+        self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
+        
+        if displayObject.avatarUrl.count > 0 {
             if let url = URL(string: displayObject.avatarUrl) {
                 self.imgAvatar.load(
                     url: url,
                     completion: { image in
-                        if indexPath.row % 4 == 0 {
-                            if let inverseImage = image.inverseImage() {
-                                DispatchQueue.main.async {
-                                    self.imgAvatar.image = inverseImage
-                                    self.imgAvatar.layer.borderWidth = 3.0
-                                    self.imgAvatar.layer.borderColor = UIColor.red.cgColor
-                                }
-                            }
-                        }
-                        else {
+                       
+                    if indexPath.row % 4 == 0 {
+                        if let inverseImage = image.inverseImage() {
                             DispatchQueue.main.async {
-                                self.imgAvatar.image = image
-                                self.imgAvatar.layer.borderWidth = 0
-                                self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
+                                self.imgAvatar.image = inverseImage
+                                self.imgAvatar.layer.borderWidth = 3.0
+                                self.imgAvatar.layer.borderColor = UIColor.red.cgColor
                             }
                         }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.imgAvatar.image = image
+                            self.imgAvatar.layer.borderWidth = 0
+                            self.imgAvatar.layer.borderColor = UIColor.clear.cgColor
+                        }
+                    }
                 })
             }
         }
