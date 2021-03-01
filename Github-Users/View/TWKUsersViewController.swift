@@ -112,8 +112,8 @@ class TWKUsersViewController: TWKViewController {
                         }
                     }
                     
+                    self.tblUsers.tableFooterView = UIView()
                     self.tblUsers.reloadData()
-                    self.refreshControl.endRefreshing()
                 }
             })
     }
