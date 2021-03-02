@@ -1,5 +1,7 @@
 # tawk.to iOS Practical Test
 
+![Wireframe](github-users-wireframe.png)
+
 ## General
 
 1. ~~In the first screen, the app has to fetch GitHub users list, parse it and display in the list (using UITableView or UICollectionView).~~
