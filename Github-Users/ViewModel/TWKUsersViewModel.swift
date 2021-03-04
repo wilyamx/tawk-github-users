@@ -64,7 +64,7 @@ class TWKUsersViewModel: TWKViewModel {
                             }
                         }
 
-                        self.offset += TWKNetworkManager.PAGE_SIZE
+                        self.offset += self.pageSize
                         
                         // determine last user id
                         if let lastUser = resultUsers?.last,
@@ -81,7 +81,7 @@ class TWKUsersViewModel: TWKViewModel {
         else {
             if let managedUsers = TWKDatabaseManager.shared.getUsers(
                 offset: self.offset,
-                limit: TWKNetworkManager.PAGE_SIZE) as? [User] {
+                limit: self.pageSize) as? [User] {
                 
                 let usersOtherStatus = managedUsers.map(
                     { user in TWKUserDO(id: user.id,
@@ -92,7 +92,7 @@ class TWKUsersViewModel: TWKViewModel {
                         
                     })
                 
-                self.offset += TWKNetworkManager.PAGE_SIZE
+                self.offset += self.pageSize
                 
                 // determine last user id
                 if let lastUser = usersOtherStatus.last {
@@ -144,7 +144,7 @@ class TWKUsersViewModel: TWKViewModel {
                             }
                         }
                         
-                        self.offset += TWKNetworkManager.PAGE_SIZE
+                        self.offset += self.pageSize
                         
                         // determine last user id
                         if let lastUser = resultUsers?.last,
@@ -162,7 +162,7 @@ class TWKUsersViewModel: TWKViewModel {
         else {
             if let managedUsers = TWKDatabaseManager.shared.getUsers(
                 offset: self.offset,
-                limit: TWKNetworkManager.PAGE_SIZE) as? [User] {
+                limit: self.pageSize) as? [User] {
                 
                 let usersOtherStatus = managedUsers.map(
                     { user in TWKUserDO(id: user.id,
@@ -173,7 +173,7 @@ class TWKUsersViewModel: TWKViewModel {
                         
                     })
                 
-                self.offset += TWKNetworkManager.PAGE_SIZE
+                self.offset += self.pageSize
                 
                 // determine last user id
                 if let lastUser = usersOtherStatus.last {
