@@ -16,12 +16,14 @@ class TWKUserDO: TWKDisplayObject {
     
     var hasNote: Bool?
     var hasSeen: Bool?
+    var note: String?
     
     init(id: Int32,
          username: String,
          avatarUrl: String,
          hasNote: Bool? = false,
-         hasSeen: Bool? = false) {
+         hasSeen: Bool? = false,
+         note: String? = "") {
         
         self.id = id
         self.username = username
@@ -29,5 +31,6 @@ class TWKUserDO: TWKDisplayObject {
         
         self.hasNote = hasNote
         self.hasSeen = hasSeen
+        self.note = note
     }
 }

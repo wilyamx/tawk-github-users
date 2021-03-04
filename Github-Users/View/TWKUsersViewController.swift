@@ -64,7 +64,7 @@ class TWKUsersViewController: TWKViewController {
         
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search"
+        self.searchController.searchBar.placeholder = "Search by username or note"
 
         self.navigationItem.searchController = searchController
         self.definesPresentationContext = true
@@ -87,6 +87,7 @@ class TWKUsersViewController: TWKViewController {
                             if user.id == userNoteStatus.id {
                                 user.hasNote = userNoteStatus.hasNote
                                 user.hasSeen = userNoteStatus.hasSeen
+                                user.note = userNoteStatus.note
                                 break
                             }
                         }
@@ -115,6 +116,7 @@ class TWKUsersViewController: TWKViewController {
                             if user.id == userNoteStatus.id {
                                 user.hasNote = userNoteStatus.hasNote
                                 user.hasSeen = userNoteStatus.hasSeen
+                                user.note = userNoteStatus.note
                                 break
                             }
                         }
@@ -127,8 +129,14 @@ class TWKUsersViewController: TWKViewController {
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        self.usersFiltered = self.users.filter { (user: TWKUserDO) -> Bool in
-            return user.username.lowercased().contains(searchText.lowercased())
+        self.usersFiltered = self.users.filter {
+            (user: TWKUserDO) -> Bool in
+            let hasUsername = user.username.lowercased().contains(searchText.lowercased())
+            var hasNote = false
+            if let note = user.note {
+                hasNote = note.lowercased().contains(searchText.lowercased())
+            }
+            return hasUsername || hasNote
         }
       
         DispatchQueue.main.async {
