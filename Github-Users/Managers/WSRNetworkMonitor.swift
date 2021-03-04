@@ -56,7 +56,8 @@ class WSRNetworkMonitor {
                 self.lastConnectionStatus = newConnectionStatus
                 
                 let notificationCenter: NotificationCenter = .default
-                notificationCenter.post(name: .networkConnectionChanged, object: nil)
+                notificationCenter.post(name: .networkConnectionChanged,
+                                        object: self.lastConnectionStatus)
             }
           }
     }

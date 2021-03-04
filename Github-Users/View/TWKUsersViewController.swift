@@ -38,6 +38,12 @@ class TWKUsersViewController: TWKViewController {
         
         self.initializeUI()
         self.getUsers()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(networkConnectionChanged(notification:)),
+            name: .networkConnectionChanged,
+            object: nil)
     }
     
     // MARK: - Private Methods
@@ -135,6 +141,15 @@ class TWKUsersViewController: TWKViewController {
     override func refreshData(_ sender: Any) {
         self.updateOfflineIndicator()
         self.getUsers()
+    }
+    
+    // MARK: - Observers
+    
+    @objc func networkConnectionChanged(notification: NSNotification) {
+        if let isConnected = notification.object as? Bool {
+            let titleColor = isConnected ? UIColor.black : UIColor.orange
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: titleColor]
+        }
     }
     
     // MARK: - Navigation
