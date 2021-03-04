@@ -11,6 +11,8 @@ import Foundation
 class TWKUsersViewModel: TWKViewModel {
     private var users = [TWKUserDO]()
     
+    private var pageSize: Int = 5
+    
     // for gihub apis
     private var lastUserId: Int32 = 0
     
@@ -27,9 +29,12 @@ class TWKUsersViewModel: TWKViewModel {
         if TWKNetworkManager.shared.isConnectedToNetwork() {
             TWKNetworkManager.shared.getUsers(
                 lastUserId: self.lastUserId,
+                pageSize: 0,
                 completion: { resultUsers in
                     // convert codable data to display model
                     if let users = resultUsers {
+                        self.pageSize = users.count
+                        
                         self.users.removeAll()
                         for user in users {
                             DispatchQueue.main.async {
@@ -106,6 +111,7 @@ class TWKUsersViewModel: TWKViewModel {
         if TWKNetworkManager.shared.isConnectedToNetwork() {
             TWKNetworkManager.shared.getUsers(
                 lastUserId: self.lastUserId,
+                pageSize: self.pageSize,
                 completion: { resultUsers in
                     // convert codable data to display model
                     if let users = resultUsers {

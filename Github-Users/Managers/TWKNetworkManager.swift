@@ -23,7 +23,6 @@ class TWKNetworkManager: WSRNetworkMonitor {
     static let shared = TWKNetworkManager()
     
     static let BASE_URL = "https://api.github.com"
-    static let PAGE_SIZE = 5
     
     // MARK: - GitHub APIs
     
@@ -53,9 +52,14 @@ class TWKNetworkManager: WSRNetworkMonitor {
      */
     public func getUsers(
         lastUserId: Int32,
+        pageSize: Int,
         completion: @escaping ([TWKGithubUserCodable]?) -> ()) {
         
-        guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)/users?since=\(lastUserId)&per_page=\(TWKNetworkManager.PAGE_SIZE)") else {
+        var urlString = "\(TWKNetworkManager.BASE_URL)/users?since=\(lastUserId))"
+        if pageSize > 0 {
+            urlString = "\(urlString)&per_page=\(pageSize)"
+        }
+        guard let url = URL(string: urlString) else {
             return
         }
         
