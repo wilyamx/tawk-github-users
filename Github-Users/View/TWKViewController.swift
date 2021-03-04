@@ -29,12 +29,8 @@ class TWKViewController: UIViewController {
     // MARK: - Public Methods
     
     public func updateOfflineIndicator() {
-        if TWKNetworkManager.shared.isConnectedToNetwork() {
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-        }
-        else {
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.orange]
-        }
+        let titleColor = TWKNetworkManager.shared.isConnectedToNetwork() ? UIColor.black : UIColor.orange
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: titleColor]
     }
     
     func enableRefreshControl(tableView: UITableView) {

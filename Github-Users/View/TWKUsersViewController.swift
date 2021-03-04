@@ -149,6 +149,10 @@ class TWKUsersViewController: TWKViewController {
         if let isConnected = notification.object as? Bool {
             let titleColor = isConnected ? UIColor.black : UIColor.orange
             self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: titleColor]
+            
+            if isConnected && !self.isFiltering  {
+                self.getUsers()
+            }
         }
     }
     
@@ -226,7 +230,7 @@ extension TWKUsersViewController: UITableViewDelegate {
         // pull-up
         if (self.tblUsers.contentOffset.y + self.tblUsers.frame.size.height) >= self.tblUsers.contentSize.height {
              DispatchQueue.main.async {
-                let spinner = UIActivityIndicatorView(style: .medium)
+                let spinner = UIActivityIndicatorView(style: .large)
                 spinner.color = UIColor.red
                 spinner.hidesWhenStopped = true
                 self.tblUsers.tableFooterView = spinner
