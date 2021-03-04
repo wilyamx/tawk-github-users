@@ -8,9 +8,11 @@
 
 import UIKit
 
-class TWKViewController: UIViewController {
+class TWKViewController: UIViewController, WSRKeyboardObserverProtocol {
 
     let refreshControl = UIRefreshControl()
+    
+    // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,11 @@ class TWKViewController: UIViewController {
         self.updateOfflineIndicator()
     }
     
-    // MARK: - Private Methods
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
     
+    // MARK: - Private Methods
     
     
     // MARK: - Public Methods

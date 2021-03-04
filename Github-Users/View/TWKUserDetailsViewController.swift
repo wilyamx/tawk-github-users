@@ -73,7 +73,10 @@ class TWKUserDetailsViewController: TWKViewController {
                             self.savedNote = noteDisplayObject.message
 
                             self.delegate?.updateNoteStatus(displayObject: displayObject)
-                            self.navigationController?.popViewController(animated: true)
+                            
+                            if let barButtonItem = self.navigationItem.leftBarButtonItem {
+                                self.onBackHandler(sender: barButtonItem)
+                            }
                         })
                 }
             })
@@ -84,6 +87,15 @@ class TWKUserDetailsViewController: TWKViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        // customize the navigation back button
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(
+            title: "Back",
+            style: .plain,
+            target: self,
+            action: #selector(self.onBackHandler(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
         self.imgAvatar.backgroundColor = .lightGray
         self.imgAvatar.contentMode = .scaleAspectFit
         
@@ -160,6 +172,7 @@ class TWKUserDetailsViewController: TWKViewController {
         
         self.getNote()
         self.seenUser()
+        self.registerForKeyboardObservers()
     }
     
     // MARK: - Private Methods
@@ -248,11 +261,12 @@ class TWKUserDetailsViewController: TWKViewController {
         label.attributedText = attributedString
     }
     
-    private func saveNote() {
-        
-    }
-    
     // MARK: - Handlers
+    
+    @objc private func onBackHandler(sender: UIBarButtonItem) {
+        self.unregisterForKeyboardObservers()
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @objc private func blogUrlHandler(gesture: UITapGestureRecognizer) {
         guard TWKNetworkManager.shared.isConnectedToNetwork() else { return }
@@ -279,4 +293,3 @@ class TWKUserDetailsViewController: TWKViewController {
     */
 
 }
-
