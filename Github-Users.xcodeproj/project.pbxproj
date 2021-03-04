@@ -27,6 +27,7 @@
 		A210728425E7A568006250FA /* TWKUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210728325E7A568006250FA /* TWKUsersViewModel.swift */; };
 		A210729025E810D1006250FA /* TWKUserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210728F25E810D1006250FA /* TWKUserDetailsViewController.swift */; };
 		A247E48925F063AD0056EC22 /* WSRNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247E48825F063AD0056EC22 /* WSRNetworkMonitor.swift */; };
+		A247E49725F0799D0056EC22 /* WSRConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247E49625F0799D0056EC22 /* WSRConstants.swift */; };
 		A2536F6F25E9E34100E83849 /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2536F6E25E9E34100E83849 /* UITapGestureRecognizer+Extension.swift */; };
 		A253700425EA249100E83849 /* TWKPopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253700325EA249100E83849 /* TWKPopupManager.swift */; };
 		A253703225EA758B00E83849 /* TWKNoteDO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253703125EA758B00E83849 /* TWKNoteDO.swift */; };
@@ -91,6 +92,7 @@
 		A210728325E7A568006250FA /* TWKUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUsersViewModel.swift; sourceTree = "<group>"; };
 		A210728F25E810D1006250FA /* TWKUserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKUserDetailsViewController.swift; sourceTree = "<group>"; };
 		A247E48825F063AD0056EC22 /* WSRNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRNetworkMonitor.swift; sourceTree = "<group>"; };
+		A247E49625F0799D0056EC22 /* WSRConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRConstants.swift; sourceTree = "<group>"; };
 		A2536F6E25E9E34100E83849 /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		A253700325EA249100E83849 /* TWKPopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKPopupManager.swift; sourceTree = "<group>"; };
 		A253703125EA758B00E83849 /* TWKNoteDO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKNoteDO.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				A210727925E7A422006250FA /* TWKConstants.swift */,
+				A247E49625F0799D0056EC22 /* WSRConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				A210720E25E78A62006250FA /* Github_Users.xcdatamodeld in Sources */,
 				A263419E25E94B15006EC26A /* TWKUserDetailsViewModel.swift in Sources */,
 				A257D43C25EB41E8000C69D5 /* TWKUsersViewProtocol.swift in Sources */,
+				A247E49725F0799D0056EC22 /* WSRConstants.swift in Sources */,
 				A258253025EABE54005D9813 /* Note+CoreDataProperties.swift in Sources */,
 				A210727425E7A299006250FA /* TWKUserTableViewCell.swift in Sources */,
 				A210728425E7A568006250FA /* TWKUsersViewModel.swift in Sources */,
