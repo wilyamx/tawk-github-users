@@ -9,6 +9,28 @@
 import Foundation
 import CoreData
 
+enum TWKDatabaseRequestError: Error {
+    case fetchError(message: String)
+    
+    private var errorCode: Int {
+        switch self {
+        case .fetchError(_): return 200
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .fetchError(let message):
+            return ""
+        }
+    }
+}
+
+enum TWKDatabaseRequestResult<T> {
+    case success(T)
+    case failure(TWKDatabaseRequestError)
+}
+
 class TWKDatabaseManager {
     // https://stackoverflow.com/questions/40769106/errors-after-create-nsmanagedobject-subclass-for-coredata-entities
     // https://www.avanderlee.com/swift/core-data-performance/

@@ -38,8 +38,8 @@ enum TWKNetworkRequestError: Error {
        }
    }
 }
-    
-enum TWKResult<T> {
+
+enum TWKNetworkRequestResult<T> {
     case success(T)
     case failure(TWKNetworkRequestError)
 }
@@ -79,7 +79,7 @@ class TWKNetworkManager: WSRNetworkMonitor {
     public func getUsers(
         lastUserId: Int32,
         pageSize: Int,
-        completion: @escaping (TWKResult<[TWKGithubUserCodable]?>) -> ()) {
+        completion: @escaping (TWKNetworkRequestResult<[TWKGithubUserCodable]?>) -> ()) {
         
         var urlString = "\(TWKNetworkManager.BASE_URL)/users?since=\(lastUserId))"
         if pageSize > 0 {
@@ -98,10 +98,10 @@ class TWKNetworkManager: WSRNetworkMonitor {
                             let jsonDecoder = JSONDecoder()
                             let responseModel = try jsonDecoder.decode([TWKGithubUserCodable].self, from: data)
                             DebugInfoKey.api.log(info: "\(responseModel)")
-                            completion(TWKResult.success(responseModel))
+                            completion(TWKNetworkRequestResult.success(responseModel))
                         }
                         catch let error {
-                            completion(TWKResult.failure(.serializationError(message: error.localizedDescription)))
+                            completion(TWKNetworkRequestResult.failure(.serializationError(message: error.localizedDescription)))
                         }
                     }
             }).resume()
@@ -146,7 +146,7 @@ class TWKNetworkManager: WSRNetworkMonitor {
      */
     public func getUserProfile(
         username: String,
-        completion: @escaping (TWKResult<TWKGithubUserProfileCodable?>) -> ()) {
+        completion: @escaping (TWKNetworkRequestResult<TWKGithubUserProfileCodable?>) -> ()) {
         
         guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)/users/\(username)") else {
             return
@@ -161,10 +161,10 @@ class TWKNetworkManager: WSRNetworkMonitor {
                             let jsonDecoder = JSONDecoder()
                             let responseModel = try jsonDecoder.decode(TWKGithubUserProfileCodable.self, from: data)
                             DebugInfoKey.api.log(info: "\(responseModel)")
-                            completion(TWKResult.success(responseModel))
+                            completion(TWKNetworkRequestResult.success(responseModel))
                         }
                         catch let error {
-                            completion(TWKResult.failure(.serializationError(message: error.localizedDescription)))
+                            completion(TWKNetworkRequestResult.failure(.serializationError(message: error.localizedDescription)))
                         }
                     }
             }).resume()
