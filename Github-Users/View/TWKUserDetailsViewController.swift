@@ -109,6 +109,7 @@ class TWKUserDetailsViewController: TWKViewController {
         self.txtvNotes.layer.borderWidth = 1.0
         self.txtvNotes.layer.borderColor = UIColor.black.cgColor
         self.txtvNotes.text = ""
+        self.txtvNotes.delegate = self
         
         if let displayObject = self.userProfileDisplayObject {
             self.title = displayObject.username
@@ -292,4 +293,14 @@ class TWKUserDetailsViewController: TWKViewController {
     }
     */
 
+}
+
+extension TWKUserDetailsViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.activeTextInput = textView
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.activeTextInput = nil
+    }
 }

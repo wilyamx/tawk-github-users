@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 public protocol WSRKeyboardObserverProtocol: NSObjectProtocol {
+    var activeTextInput: UITextInput? { get set }
+    
     func registerForKeyboardObservers()
     func unregisterForKeyboardObservers()
 }
@@ -23,7 +25,7 @@ extension WSRKeyboardObserverProtocol where Self: UIViewController {
 
         var tokenShow: NSObjectProtocol!
         tokenShow = defaultCenter.addObserver(
-            forName: UIResponder.keyboardWillShowNotification,
+            forName: UIResponder.keyboardDidShowNotification,
             object: nil,
             queue: nil) {
             [weak self] (notification) in
@@ -55,25 +57,30 @@ extension WSRKeyboardObserverProtocol where Self: UIViewController {
     }
     
     public func keyboardWillShow(_ notification: Notification) {
-        print("]>> keyboardWillShow")
-        let rect = ((notification as NSNotification).userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-//        let height = rect.height
-//        var insets = UIEdgeInsetsMake(0, 0, height, 0)
-//        insets.top = contentInset.top
-//        contentInset = insets
-//        scrollIndicatorInsets = insets
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            // if keyboard size is not available for some reason, dont do anything
+            return
+        }
+        guard let uiTextInput = self.activeTextInput as? UIView else {
+            return
+        }
+        
+        var shouldMoveViewUp = false
+
+        let bottomOfTextField = uiTextInput.convert(uiTextInput.bounds, to: self.view).maxY;
+        let topOfKeyboard = self.view.frame.height - keyboardSize.height
+
+        if bottomOfTextField > topOfKeyboard {
+            shouldMoveViewUp = true
+        }
+        
+        if(shouldMoveViewUp) {
+            self.view.frame.origin.y = 0 - keyboardSize.height + uiTextInput.bounds.size.height
+        }
     }
 
     public func keyboardWillHide(_ notification: Notification) {
-        print("]>> keyboardWillHide")
-//        var insets = UIEdgeInsetsMake(0, 0, 0, 0)
-//        insets.top = contentInset.top
-//        UIView.animate(withDuration: 0.3) {
-//            self.contentInset = insets
-//            self.scrollIndicatorInsets = insets
-//        }
+        self.view.frame.origin.y = 0
     }
-
-    
 
 }

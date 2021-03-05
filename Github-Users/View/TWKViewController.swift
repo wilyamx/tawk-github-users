@@ -9,7 +9,8 @@
 import UIKit
 
 class TWKViewController: UIViewController, WSRKeyboardObserverProtocol {
-
+    var activeTextInput: UITextInput?
+    
     let refreshControl = UIRefreshControl()
     
     // MARK: - View Controller Life Cycle
@@ -75,3 +76,4 @@ class TWKViewController: UIViewController, WSRKeyboardObserverProtocol {
     */
 
 }
+
