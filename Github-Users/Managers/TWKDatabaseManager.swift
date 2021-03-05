@@ -17,7 +17,6 @@ class TWKDatabaseManager {
     static let shared = TWKDatabaseManager()
     
     var readContext: NSManagedObjectContext = TWKReference.appDelegate.persistentContainer.viewContext
-    //var writeContext: NSManagedObjectContext = TWKReference.appDelegate.persistentContainer.viewContext
     lazy var writeContext: NSManagedObjectContext = {
         let newbackgroundContext = TWKReference.appDelegate.persistentContainer.newBackgroundContext()
         newbackgroundContext.automaticallyMergesChangesFromParent = true
