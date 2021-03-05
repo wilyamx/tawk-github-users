@@ -39,6 +39,7 @@ class TWKDatabaseManager {
     static let shared = TWKDatabaseManager()
     
     var readContext: NSManagedObjectContext = TWKReference.appDelegate.persistentContainer.viewContext
+    //var writeContext: NSManagedObjectContext = TWKReference.appDelegate.persistentContainer.viewContext
     lazy var writeContext: NSManagedObjectContext = {
         let newbackgroundContext = TWKReference.appDelegate.persistentContainer.newBackgroundContext()
         newbackgroundContext.automaticallyMergesChangesFromParent = true
@@ -123,12 +124,11 @@ class TWKDatabaseManager {
         }
         
         self.writeContext.performAndWait({
-            
             // has existing note (update)
             if let managedNote = managedUser.note {
                 managedNote.setValue(message, forKey: "message")
                 do {
-                    try self.writeContext.save()
+                    try self.readContext.save()
                     completion(message)
                 }
                 catch let error {
@@ -138,12 +138,13 @@ class TWKDatabaseManager {
             }
             // no associated note (create)
             else {
-                let note = Note(context: self.readContext)
-                note.message = message
-
-                managedUser.note = note
+                let entity = NSEntityDescription.entity(forEntityName: "Note", in: self.readContext)
+                let newNote = NSManagedObject(entity: entity!, insertInto: self.readContext)
+                newNote.setValue(message, forKey: "message")
+                
+                managedUser.setValue(newNote, forKey: "note")
                 do {
-                    try self.writeContext.save()
+                    try self.readContext.save()
                     completion(message)
                 }
                 catch let error {
@@ -233,4 +234,15 @@ class TWKDatabaseManager {
         }
     }
     
+    // MARK: - Managed Note
+    
+    func getNotesCount() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        do {
+            let count = try self.readContext.count(for: fetchRequest)
+            print("]>> notes.count \(count)")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
