@@ -65,13 +65,14 @@ class TWKUserDetailsViewController: TWKViewController {
             title: "Alert",
             message: "Save current note changes?",
             confirmed: {
-                if let displayObject = self.userProfileDisplayObject {
+                if var displayObject = self.userProfileDisplayObject {
                     self.viewModel.userCreateOrUpdateNote(
                         userId: displayObject.id,
                         message: self.txtvNotes.text,
                         completion: { noteDisplayObject in
                             self.savedNote = noteDisplayObject.message
 
+                            displayObject.note = self.savedNote
                             self.delegate?.updateNoteStatus(displayObject: displayObject)
                             
                             if let barButtonItem = self.navigationItem.leftBarButtonItem {

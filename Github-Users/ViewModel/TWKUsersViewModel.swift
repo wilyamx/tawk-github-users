@@ -132,6 +132,7 @@ class TWKUsersViewModel: TWKViewModel {
                         
                         // get users note statuses
                         // get users seen statuses
+                        // get users note message
                         let userIds = users.map({ $0.id ?? 0})
                         DispatchQueue.main.async {
                             if let managedUsers = TWKDatabaseManager.shared.getUsersByIds(userIds: userIds) as? [User] {

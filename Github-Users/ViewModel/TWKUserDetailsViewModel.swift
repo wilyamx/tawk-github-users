@@ -46,11 +46,12 @@ class TWKUserDetailsViewModel: TWKViewModel {
         message: String,
         completion: @escaping (TWKNoteDO) -> ()) {
         
-        if let message = TWKDatabaseManager.shared.userCreateOrUpdateNote(
+        TWKDatabaseManager.shared.userCreateOrUpdateNote(
             userId: userId,
-            message: message) {
-            completion(TWKNoteDO(message: message))
-        }
+            message: message,
+            completion: { message in
+                completion(TWKNoteDO(message: message ?? ""))
+            })
     }
     
     func userSeenProfile(

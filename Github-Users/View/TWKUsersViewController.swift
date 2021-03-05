@@ -265,9 +265,10 @@ extension TWKUsersViewController: UISearchResultsUpdating {
 
 extension TWKUsersViewController: TWKUsersViewProtocol {
     func updateNoteStatus(displayObject: TWKUserDO) {
-        if let displayObject = self.users.first(where: { $0.id == displayObject.id }) {
+        if let userDO = self.users.first(where: { $0.id == displayObject.id }) {
             DispatchQueue.main.async {
-                displayObject.hasNote = true
+                userDO.hasNote = true
+                userDO.note = displayObject.note
                 self.tblUsers.reloadData()
             }
         }
