@@ -8,14 +8,38 @@
 
 import Foundation
 
-struct TWKRequestError {
-    var errorCode: Int = 0
-    var errorMessage: String = ""
+enum TWKNetworkRequestError: Error {
+    case noInternet
+    case httpError(statusCode: Int)
+    case serverError(message: String)
+    case serializationError(message: String)
+    
+    private var errorCode: Int {
+        switch self {
+        case .noInternet: return 100
+        case .httpError(_): return 101
+        case .serverError(_): return 102
+        case .serializationError(_): return 103
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .noInternet:
+            return "There is no internet connection."
+        case .httpError(let statusCode):
+            return "The call failed with HTTP code \(statusCode)."
+        case .serverError(let message):
+            return "The server responded with message \"\(message)\"."
+        case .serializationError(let message):
+            return "JSON Serialization error :: \(message)"
+       }
+   }
 }
-
-enum TWKResponse<T> {
-    case succeed(T)
-    case failed(TWKRequestError)
+    
+enum TWKResult<T> {
+    case success(T)
+    case failure(TWKNetworkRequestError)
 }
 
 class TWKNetworkManager: WSRNetworkMonitor {
@@ -120,7 +144,7 @@ class TWKNetworkManager: WSRNetworkMonitor {
      */
     public func getUserProfile(
         username: String,
-        completion: @escaping (TWKGithubUserProfileCodable?) -> ()) {
+        completion: @escaping (TWKResult<TWKGithubUserProfileCodable?>) -> ()) {
         
         guard let url = URL(string: "\(TWKNetworkManager.BASE_URL)/users/\(username)") else {
             return
@@ -135,10 +159,10 @@ class TWKNetworkManager: WSRNetworkMonitor {
                             let jsonDecoder = JSONDecoder()
                             let responseModel = try jsonDecoder.decode(TWKGithubUserProfileCodable.self, from: data)
                             DebugInfoKey.api.log(info: "\(responseModel)")
-                            completion(responseModel)
+                            completion(TWKResult.success(responseModel))
                         }
                         catch let error {
-                            DebugInfoKey.error.log(info: "JSON Serialization error :: \(error)")
+                            completion(TWKResult.failure(.serializationError(message: error.localizedDescription)))
                         }
                     }
             }).resume()

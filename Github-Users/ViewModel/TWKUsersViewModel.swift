@@ -198,17 +198,23 @@ class TWKUsersViewModel: TWKViewModel {
         
         TWKNetworkManager.shared.getUserProfile(
             username: username,
-            completion: { profile in
-                if let profile = profile {
-                    let displayObject = TWKUserProfileDO(id: profile.id ?? 0,
-                                                         username: profile.login ?? "",
-                                                         avatarUrl: profile.avatarUrl ?? "",
-                                                         followers: profile.followers ?? 0,
-                                                         following: profile.following ?? 0,
-                                                         name: profile.name ?? "",
-                                                         company: profile.company ?? "",
-                                                         blog: profile.blog ?? "")
-                    completion(displayObject)
+            completion: { result in
+                switch result {
+                case .success(let profile):
+                    if let profile = profile {
+                        let displayObject = TWKUserProfileDO(id: profile.id ?? 0,
+                                                             username: profile.login ?? "",
+                                                             avatarUrl: profile.avatarUrl ?? "",
+                                                             followers: profile.followers ?? 0,
+                                                             following: profile.following ?? 0,
+                                                             name: profile.name ?? "",
+                                                             company: profile.company ?? "",
+                                                             blog: profile.blog ?? "")
+                        completion(displayObject)
+                    }
+                    
+                case .failure(let error):
+                    DebugInfoKey.error.log(info: error.description)
                 }
             })
     }
