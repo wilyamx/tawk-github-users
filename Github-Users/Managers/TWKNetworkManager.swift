@@ -77,7 +77,7 @@ class TWKNetworkManager: WSRNetworkMonitor {
     public func getUsers(
         lastUserId: Int32,
         pageSize: Int,
-        completion: @escaping ([TWKGithubUserCodable]?) -> ()) {
+        completion: @escaping (TWKResult<[TWKGithubUserCodable]?>) -> ()) {
         
         var urlString = "\(TWKNetworkManager.BASE_URL)/users?since=\(lastUserId))"
         if pageSize > 0 {
@@ -96,10 +96,10 @@ class TWKNetworkManager: WSRNetworkMonitor {
                             let jsonDecoder = JSONDecoder()
                             let responseModel = try jsonDecoder.decode([TWKGithubUserCodable].self, from: data)
                             DebugInfoKey.api.log(info: "\(responseModel)")
-                            completion(responseModel)
+                            completion(TWKResult.success(responseModel))
                         }
                         catch let error {
-                            DebugInfoKey.error.log(info: "JSON Serialization error :: \(error)")
+                            completion(TWKResult.failure(.serializationError(message: error.localizedDescription)))
                         }
                     }
             }).resume()
