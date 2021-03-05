@@ -87,29 +87,38 @@ class TWKUsersViewModel: TWKViewModel {
         }
         
         else {
-            if let managedUsers = TWKDatabaseManager.shared.getUsers(
+            TWKDatabaseManager.shared.getUsers(
                 offset: self.offset,
-                limit: self.pageSize) as? [User] {
-                
-                let usersOtherStatus = managedUsers.map(
-                    { user in TWKUserDO(id: user.id,
-                                        username: user.login ?? "",
-                                        avatarUrl: user.avatarUrl ?? "",
-                                        hasNote: user.note != nil,
-                                        hasSeen: user.seen,
-                                        note: user.note?.message)
+                limit: self.pageSize,
+                completion: { result in
+                    switch result {
+                    case .success(let managedUsers):
+                        if let managedUsers = managedUsers as? [User] {
+                            let usersOtherStatus = managedUsers.map(
+                                { user in TWKUserDO(id: user.id,
+                                                    username: user.login ?? "",
+                                                    avatarUrl: user.avatarUrl ?? "",
+                                                    hasNote: user.note != nil,
+                                                    hasSeen: user.seen,
+                                                    note: user.note?.message)
+
+                                })
+
+                            self.offset += self.pageSize
+
+                            // determine last user id
+                            if let lastUser = usersOtherStatus.last {
+                                self.lastUserId = lastUser.id
+                            }
+
+                            completion(usersOtherStatus)
+                        }
                         
-                    })
-                
-                self.offset += self.pageSize
-                
-                // determine last user id
-                if let lastUser = usersOtherStatus.last {
-                    self.lastUserId = lastUser.id
-                }
-                
-                completion(usersOtherStatus)
-            }
+                    case .failure(let error):
+                        DebugInfoKey.error.log(info: error.description)
+                    }
+                })
+            
         }
     }
     
@@ -177,29 +186,37 @@ class TWKUsersViewModel: TWKViewModel {
         }
         
         else {
-            if let managedUsers = TWKDatabaseManager.shared.getUsers(
+            TWKDatabaseManager.shared.getUsers(
                 offset: self.offset,
-                limit: self.pageSize) as? [User] {
-                
-                let usersOtherStatus = managedUsers.map(
-                    { user in TWKUserDO(id: user.id,
-                                        username: user.login ?? "",
-                                        avatarUrl: user.avatarUrl ?? "",
-                                        hasNote: user.note != nil,
-                                        hasSeen: user.seen,
-                                        note: user.note?.message)
+                limit: self.pageSize,
+                completion: { result in
+                    switch result {
+                    case .success(let managedUsers):
+                        if let managedUsers = managedUsers as? [User] {
+                            let usersOtherStatus = managedUsers.map(
+                                { user in TWKUserDO(id: user.id,
+                                                    username: user.login ?? "",
+                                                    avatarUrl: user.avatarUrl ?? "",
+                                                    hasNote: user.note != nil,
+                                                    hasSeen: user.seen,
+                                                    note: user.note?.message)
+
+                                })
+
+                            self.offset += self.pageSize
+
+                            // determine last user id
+                            if let lastUser = usersOtherStatus.last {
+                                self.lastUserId = lastUser.id
+                            }
+
+                            completion(usersOtherStatus)
+                        }
                         
-                    })
-                
-                self.offset += self.pageSize
-                
-                // determine last user id
-                if let lastUser = usersOtherStatus.last {
-                    self.lastUserId = lastUser.id
-                }
-                
-                completion(usersOtherStatus)
-            }
+                    case .failure(let error):
+                        DebugInfoKey.error.log(info: error.description)
+                    }
+                })
         }
         
     }

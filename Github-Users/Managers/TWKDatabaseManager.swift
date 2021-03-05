@@ -10,18 +10,18 @@ import Foundation
 import CoreData
 
 enum TWKDatabaseRequestError: Error {
-    case fetchError(message: String)
+    case fetchUsers(offset:Int, message: String)
     
     private var errorCode: Int {
         switch self {
-        case .fetchError(_): return 200
+        case .fetchUsers(_, _): return 200
         }
     }
     
     var description: String {
         switch self {
-        case .fetchError(let message):
-            return ""
+        case .fetchUsers(let offset, let message):
+            return "Fetch users from offset=\(offset) :: \(message)"
         }
     }
 }
@@ -173,7 +173,11 @@ class TWKDatabaseManager {
     
     // MARK: - Managed User for Reading
         
-    public func getUsers(offset: Int, limit: Int) -> [NSManagedObject]? {
+    public func getUsers(
+        offset: Int,
+        limit: Int,
+        completion: @escaping (TWKDatabaseRequestResult<[NSManagedObject]?>) -> ()) {
+        
         // sorting
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
         let sortDescriptors = [sortDescriptor]
@@ -186,11 +190,10 @@ class TWKDatabaseManager {
         var items: [Any] = []
         do {
             items = try self.readContext.fetch(fetchRequest)
-            return items as? [NSManagedObject]
+            completion(TWKDatabaseRequestResult.success(items as? [NSManagedObject]))
         }
         catch let error {
-            DebugInfoKey.error.log(info: "Fetch users from offset=\(offset) :: \(error.localizedDescription)")
-            return nil
+            completion(TWKDatabaseRequestResult.failure(.fetchUsers(offset: offset, message: error.localizedDescription)))
         }
     }
     
