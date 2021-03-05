@@ -64,9 +64,11 @@ project is using any code dependency manager.~~
 1. Empty views such as list items (while data is still loading) should have Loading Shimmer aka ​Skeletons ​~ https://miro.medium.com/max/4000/0*s7uxK77a0FY43NLe.png​r​esembling​final views.​
 2. ~~Exponential backoff ​must be used​​when trying to reload the data.~~
 3. Any data fetch should utilize ​Result types.​
-4. CoreData stack implementation must use t​wo managed contexts​- 1.​main context​to
-be used for reading data and feeding into UI 2. write (​background) context​- that is
-used for writing data.
+4. ~~CoreData stack implementation must use t​wo managed contexts~~
+	1. ~~​main context ​to
+be used for reading data and feeding into UI~~
+	2. ~~write (​background) context​ - that is
+used for writing data.~~
 5. All CoreData ​write ​queries must be ​queued​ while allowing one concurrent query at
 any time.
 6. ~~Coordinator and/or MVVM patterns are used.~~
