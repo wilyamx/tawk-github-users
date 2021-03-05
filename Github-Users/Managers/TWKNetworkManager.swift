@@ -8,6 +8,8 @@
 
 import Foundation
 
+// https://donaldhays.com/2014/12/16/enum-errors-in-swift/
+
 enum TWKNetworkRequestError: Error {
     case noInternet
     case httpError(statusCode: Int)
