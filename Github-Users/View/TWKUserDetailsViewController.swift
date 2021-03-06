@@ -65,7 +65,7 @@ class TWKUserDetailsViewController: TWKViewController {
             title: "Alert",
             message: "Save current note changes?",
             confirmed: {
-                if var displayObject = self.userProfileDisplayObject {
+                if let displayObject = self.userProfileDisplayObject {
                     self.viewModel.userCreateOrUpdateNote(
                         userId: displayObject.id,
                         message: self.txtvNotes.text,
@@ -178,43 +178,6 @@ class TWKUserDetailsViewController: TWKViewController {
     }
     
     // MARK: - Private Methods
-    
-    private func getUserProfile() {
-        if let userDO = self.userProfileDisplayObject {
-            self.viewModel.getUserProfile(
-                username: userDO.username,
-                completion: { [unowned self] profile in
-                    DispatchQueue.main.async {
-                        self.followersCount = profile.followers
-                        self.followingCount = profile.following
-                        
-                        self.highlightFollowCount(
-                            message: "Name: \(profile.name)",
-                            highlightedString: "\(profile.name)",
-                            label: self.lblName)
-                        self.highlightFollowCount(
-                            message: "Company: \(profile.company)",
-                            highlightedString: "\(profile.company)",
-                            label: self.lblCompany)
-                        self.highlightFollowCount(
-                            message: "Blog: \(profile.blog)",
-                            highlightedString: "\(profile.blog)",
-                            label: self.lblBlog)
-                        
-                        // blog url tap gesture
-                        self.lblBlog.isUserInteractionEnabled = true
-                        if let blogText = self.lblBlog.text {
-                            self.blogUrlRange = (blogText as NSString).range(of: profile.blog)
-                        }
-                        let tapGesture = UITapGestureRecognizer(
-                            target: self,
-                            action: #selector(blogUrlHandler(gesture:)))
-                        self.lblBlog.addGestureRecognizer(tapGesture)
-                    }
-                })
-        }
-        
-    }
     
     private func getNote() {
         if let userDO = self.userProfileDisplayObject {
