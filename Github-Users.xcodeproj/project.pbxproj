@@ -38,6 +38,11 @@
 		A258252E25EABE54005D9813 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258252A25EABE54005D9813 /* User+CoreDataProperties.swift */; };
 		A258252F25EABE54005D9813 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258252B25EABE54005D9813 /* Note+CoreDataClass.swift */; };
 		A258253025EABE54005D9813 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258252C25EABE54005D9813 /* Note+CoreDataProperties.swift */; };
+		A25840D425F310DF004C34F2 /* WSRCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25840D325F310DF004C34F2 /* WSRCoreDataStack.swift */; };
+		A25840D925F3117E004C34F2 /* WSRTestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25840D825F3117E004C34F2 /* WSRTestCoreDataStack.swift */; };
+		A25840DE25F3123A004C34F2 /* TWKCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25840DD25F3123A004C34F2 /* TWKCoreDataTests.swift */; };
+		A25840E325F312AB004C34F2 /* WSRCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25840D325F310DF004C34F2 /* WSRCoreDataStack.swift */; };
+		A25840E725F312AF004C34F2 /* WSRTestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25840D825F3117E004C34F2 /* WSRTestCoreDataStack.swift */; };
 		A263417225E89556006EC26A /* TWKNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417125E89556006EC26A /* TWKNetworkManager.swift */; };
 		A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */; };
 		A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263419325E912DB006EC26A /* UIImageView+Extension.swift */; };
@@ -104,6 +109,9 @@
 		A258252A25EABE54005D9813 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A258252B25EABE54005D9813 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A258252C25EABE54005D9813 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A25840D325F310DF004C34F2 /* WSRCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRCoreDataStack.swift; sourceTree = "<group>"; };
+		A25840D825F3117E004C34F2 /* WSRTestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRTestCoreDataStack.swift; sourceTree = "<group>"; };
+		A25840DD25F3123A004C34F2 /* TWKCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKCoreDataTests.swift; sourceTree = "<group>"; };
 		A263417125E89556006EC26A /* TWKNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKNetworkManager.swift; sourceTree = "<group>"; };
 		A263417725E8975F006EC26A /* TWKGithubUserCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWKGithubUserCodable.swift; sourceTree = "<group>"; };
 		A263419325E912DB006EC26A /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -188,6 +196,7 @@
 			children = (
 				A210721D25E78A65006250FA /* Github_UsersTests.swift */,
 				A210721F25E78A65006250FA /* Info.plist */,
+				A25840DD25F3123A004C34F2 /* TWKCoreDataTests.swift */,
 			);
 			path = "Github-UsersTests";
 			sourceTree = "<group>";
@@ -287,6 +296,7 @@
 		A247E4AD25F109F90056EC22 /* WSR */ = {
 			isa = PBXGroup;
 			children = (
+				A25840E225F3129D004C34F2 /* Testing */,
 				A247E49C25F0C1460056EC22 /* WSRKeyboardObserver.swift */,
 				A247E48825F063AD0056EC22 /* WSRNetworkMonitor.swift */,
 				A247E49625F0799D0056EC22 /* WSRConstants.swift */,
@@ -303,6 +313,15 @@
 				A258252C25EABE54005D9813 /* Note+CoreDataProperties.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A25840E225F3129D004C34F2 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				A25840D325F310DF004C34F2 /* WSRCoreDataStack.swift */,
+				A25840D825F3117E004C34F2 /* WSRTestCoreDataStack.swift */,
+			);
+			path = Testing;
 			sourceTree = "<group>";
 		};
 		A263417625E896D4006EC26A /* Codable */ = {
@@ -473,6 +492,7 @@
 				A210720425E78A62006250FA /* AppDelegate.swift in Sources */,
 				A263419425E912DB006EC26A /* UIImageView+Extension.swift in Sources */,
 				A26341AB25E96229006EC26A /* TWKUserProfileDO.swift in Sources */,
+				A25840D425F310DF004C34F2 /* WSRCoreDataStack.swift in Sources */,
 				A263417825E8975F006EC26A /* TWKGithubUserCodable.swift in Sources */,
 				A26341BC25E98660006EC26A /* TWKHiddenView.swift in Sources */,
 				A258252D25EABE54005D9813 /* User+CoreDataClass.swift in Sources */,
@@ -480,6 +500,7 @@
 				A2536F6F25E9E34100E83849 /* UITapGestureRecognizer+Extension.swift in Sources */,
 				A247E48925F063AD0056EC22 /* WSRNetworkMonitor.swift in Sources */,
 				A26341A325E95A81006EC26A /* TWKGithubUserProfileCodable.swift in Sources */,
+				A25840D925F3117E004C34F2 /* WSRTestCoreDataStack.swift in Sources */,
 				A263419925E9160B006EC26A /* UIImage+Extension.swift in Sources */,
 				A253703225EA758B00E83849 /* TWKNoteDO.swift in Sources */,
 				A253700425EA249100E83849 /* TWKPopupManager.swift in Sources */,
@@ -497,6 +518,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A210721E25E78A65006250FA /* Github_UsersTests.swift in Sources */,
+				A25840DE25F3123A004C34F2 /* TWKCoreDataTests.swift in Sources */,
+				A25840E725F312AF004C34F2 /* WSRTestCoreDataStack.swift in Sources */,
+				A25840E325F312AB004C34F2 /* WSRCoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
